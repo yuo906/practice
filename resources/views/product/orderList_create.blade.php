@@ -371,13 +371,13 @@
         <div class="content-page py-4 px-lg-0 px-xl-5 mx-md-5 d-flex flex-column">
             <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                <div
-                    class="content-title d-flex justify-content-between align-items-center flex-column px-xxl-5 px-xl-0">
+                <div class="content-title d-flex justify-content-between align-items-center flex-column px-xxl-5 px-xl-0">
                     <div class="title mb-4 px-2 w-100">
                         <h2 class="fw-medium w-50">新增產品</h2>
-                        <h6><span class="text-Dashboard">Dashboard</span>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;
-                            Order
-                            List</h6>
+                        <h6><span class="text-Dashboard">Dashboard</span>
+                            &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;
+                            Order List
+                        </h6>
                     </div>
                     <div class="order w-100 mb-5 px-2">
                         <div class="card p-5 border-0 o-card">
@@ -387,8 +387,8 @@
                                     <input name="name" type="text" required>
                                 </div>
                                 <div class="d-flex gap-5">
-                                    <span class="bg-primary-subtle px-3 py-2">產品圖片</span>
-                                    <input name="image" type="file">
+                                    <span class="bg-primary-subtle px-3 py-2">產品圖片*</span>
+                                    <input name="image" type="file" accept="image/*">
                                 </div>
                                 <div class="d-flex gap-5">
                                     <span class="bg-primary-subtle px-3 py-2">產品價格*</span>
@@ -405,7 +405,7 @@
                                 </div>
                                 <div class="d-flex gap-5">
                                     <span class="bg-primary-subtle px-3 py-2">產品描述</span>
-                                    <textarea name="desc"></textarea>
+                                    <textarea name="desc" class="w-100" style="resize:none; min-height:150px;"></textarea>
                                 </div>
                             </div>
                             <div class="bottom btn-group mt-4 d-flex justify-content-evenly">

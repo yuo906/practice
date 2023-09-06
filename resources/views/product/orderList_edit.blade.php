@@ -6,9 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order List Dashboard - FreshCart</title>
-    <link rel="shortcut icon" type="image/x-icon" href="{{asset('./img/favicon.ico')}}">
-    <link rel="stylesheet" href="{{asset('./css/css.css')}}">
-    <link rel="stylesheet" href="{{asset('./css/bootstrap.css')}}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('./img/favicon.ico') }}">
+    <link rel="stylesheet" href="{{ asset('./css/css.css') }}">
+    <link rel="stylesheet" href="{{ asset('./css/bootstrap.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 </head>
@@ -60,8 +60,9 @@
             <button class=" text-start px-3 py-3 w-100" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarToggleExternalContent20" aria-controls="navbarToggleExternalContent20"
                 aria-expanded="false" aria-label="Toggle navigation" id="MenuLevel"><i
-                    class=" bi bi-arrow-90deg-down"></i><span class="ms-3">Menu Level</span><span class="float-end"><img
-                        class="chevron-down-1" src="./img/下載.svg" width="14" height="22.39" alt=""></span></button>
+                    class=" bi bi-arrow-90deg-down"></i><span class="ms-3">Menu Level</span><span
+                    class="float-end"><img class="chevron-down-1" src="./img/下載.svg" width="14" height="22.39"
+                        alt=""></span></button>
             <div class="collapse" id="navbarToggleExternalContent20">
                 <div class="option-list ps-0">
                     <button class=" text-start pe-3 ps-4 py-2 w-100 position-relative" type="button"
@@ -97,8 +98,8 @@
                                 aria-controls="navbarToggleExternalContent23" aria-expanded="false"
                                 aria-label="Toggle navigation" id="navItem"><span class="ms-4">
                                     <div class="dot"></div>NavItem 1
-                                </span><span class="float-end"><img class="chevron-down-4" src="./img/下載.svg" width="14"
-                                        height="22.39" alt=""></span></button>
+                                </span><span class="float-end"><img class="chevron-down-4" src="./img/下載.svg"
+                                        width="14" height="22.39" alt=""></span></button>
                             <div class="collapse" id="navbarToggleExternalContent23">
                                 <div class="option-list ps-4">
                                     <button class=" text-start pe-3 ps-4 py-2 w-100 position-relative"><span
@@ -125,7 +126,8 @@
             <div class=" text-start px-3 py-3 text-body-tertiary"><i class="bi bi-images"></i><span
                     class="ms-3">Media</span></div>
 
-            <div class=" text-start px-3 py-3 text-body-tertiary"><i class="bi bi-gear"></i><span class="ms-3">Store
+            <div class=" text-start px-3 py-3 text-body-tertiary"><i class="bi bi-gear"></i><span
+                    class="ms-3">Store
                     Settings</span></div>
 
             <div class=" text-start px-3 py-xl-3 menuL-title"><span>Support</span><span
@@ -139,14 +141,16 @@
                     class="ms-3">Help Center
                 </span></div>
 
-            <div class=" text-start px-3 py-3 text-body-tertiary"><i class="bi bi-infinity"></i><span class="ms-3">How
+            <div class=" text-start px-3 py-3 text-body-tertiary"><i class="bi bi-infinity"></i><span
+                    class="ms-3">How
                     FreshCart
                     Works</span></div>
 
             <div class=" text-start px-3 py-xl-3 menuL-title"><span>Our Apps</span></div>
 
 
-            <div class=" text-start px-3 py-3 text-body-tertiary"><i class="bi bi-apple"></i><span class="ms-3">Apple
+            <div class=" text-start px-3 py-3 text-body-tertiary"><i class="bi bi-apple"></i><span
+                    class="ms-3">Apple
                     Store</span></div>
 
 
@@ -160,8 +164,9 @@
                 <div class="navL d-flex w-50">
                     <button class="navbar-toggler d-xl-none p-0 border-0  burger" type="button"
                         data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-                        <span class="ps-4 pe-2"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
-                                fill="currentColor" class="bi bi-text-indent-right" viewBox="0 0 16 16">
+                        <span class="ps-4 pe-2"><svg xmlns="http://www.w3.org/2000/svg" width="32"
+                                height="32" fill="currentColor" class="bi bi-text-indent-right"
+                                viewBox="0 0 16 16">
                                 <path
                                     d="M2 3.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm10.646 2.146a.5.5 0 0 1 .708.708L11.707 8l1.647 1.646a.5.5 0 0 1-.708.708l-2-2a.5.5 0 0 1 0-.708l2-2zM2 6.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z">
                                 </path>
@@ -169,8 +174,8 @@
                     </button>
                     <form class="d-flex position-relative ms-2">
                         <!-- <span class="mdi mdi-magnify search-icon"></span> -->
-                        <input class="form-control rounded-0 w-100" id="search-area" type="search" placeholder="Search"
-                            aria-label="Search">
+                        <input class="form-control rounded-0 w-100" id="search-area" type="search"
+                            placeholder="Search" aria-label="Search">
                         <!-- <button class="btn rounded-0" type="submit" id="search">Search</button> -->
                     </form>
                 </div>
@@ -184,8 +189,9 @@
                                     <p>You have 2 unread messages</p>
                                 </div>
                                 <a class="dropdown-item w-25 ps-5 pe-0 ms-3 float-end" href="#"><svg
-                                        xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor"
-                                        class="bi bi-check2-all text-success" viewBox="0 0 16 16">
+                                        xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                        fill="currentColor" class="bi bi-check2-all text-success"
+                                        viewBox="0 0 16 16">
                                         <path
                                             d="M12.354 4.354a.5.5 0 0 0-.708-.708L5 10.293 1.854 7.146a.5.5 0 1 0-.708.708l3.5 3.5a.5.5 0 0 0 .708 0l7-7zm-4.208 7-.896-.897.707-.707.543.543 6.646-6.647a.5.5 0 0 1 .708.708l-7 7a.5.5 0 0 1-.708 0z">
                                         </path>
@@ -212,7 +218,8 @@
                                 <li class="px-4 py-3">
                                     <div class="d-flex"><img src="./img/avatar-2.jpg" alt="">
                                         <div class="ms-3"><span>Jitu Chauhan&nbsp;<span
-                                                    class="text-body-secondary">answered to your pending order list with
+                                                    class="text-body-secondary">answered to your pending order list
+                                                    with
                                                     notes</span>
 
 
@@ -252,7 +259,8 @@
                             </div>
                         </ul>
                     </div>
-                    <div class="dropdown ms-2"><button type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <div class="dropdown ms-2"><button type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
                             <div class="logo-pic rounded-circle"></div>
                         </button>
                         <ul class="dropdown-menu p-0" id="logo-list">
@@ -265,7 +273,8 @@
                                 <li><a class="dropdown-item px-2" href="#">Profile</a></li>
                                 <li><a class="dropdown-item px-2" href="#">Settings</a></li>
                             </div>
-                            <div class="px-3 py-2 border-top text-success text-start"><a href="#">Log Out</a></div>
+                            <div class="px-3 py-2 border-top text-success text-start"><a href="#">Log Out</a>
+                            </div>
                         </ul>
                     </div>
                 </div>
@@ -274,7 +283,8 @@
                     <div
                         class="top-title fw-bolder text-center w-100 sticky-top d-flex justify-content-between align-items-center py-3 px-3">
                         <div id="menuL-logo-2"></div>
-                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
                     </div>
                     <div class="side-nav-2 w-100 px-3">
                         <button class=" text-start px-3 py-3 w-100" type="button"><i class="bi bi-house"></i><span
@@ -284,12 +294,13 @@
                         <div class=" text-start px-3 py-3 menuL-title"><span>Store Managements</span></div>
                         <button class=" text-start px-3 py-3 w-100" type="button"><i class="bi bi-cart"></i><span
                                 class="ms-3">Products</span></button>
-                        <button class=" text-start px-3 py-3 w-100" type="button"><i class="bi bi-list-task"></i><span
-                                class="ms-3">Categories</span></button>
+                        <button class=" text-start px-3 py-3 w-100" type="button"><i
+                                class="bi bi-list-task"></i><span class="ms-3">Categories</span></button>
 
                         <button class=" text-start px-3 py-3 w-100 orders-2" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#navbarToggleExternalContent5" aria-controls="navbarToggleExternalContent5"
-                            aria-expanded="false" aria-label="Toggle navigation"><i class="bi bi-bag"></i><span
+                            data-bs-target="#navbarToggleExternalContent5"
+                            aria-controls="navbarToggleExternalContent5" aria-expanded="false"
+                            aria-label="Toggle navigation"><i class="bi bi-bag"></i><span
                                 class="ms-3">Orders</span><span class="float-end"><img class="chevron-down-5"
                                     src="./img/下載.svg" width="14" height="22.39" alt=""></span></button>
                         <div class="collapse" id="navbarToggleExternalContent5">
@@ -334,8 +345,8 @@
                                 class="ms-3">Support Ticket
                             </span></div>
 
-                        <div class=" text-start px-3 py-3 text-body-tertiary"><i class="bi bi-question-circle"></i><span
-                                class="ms-3">Help Center
+                        <div class=" text-start px-3 py-3 text-body-tertiary"><i
+                                class="bi bi-question-circle"></i><span class="ms-3">Help Center
                             </span></div>
 
                         <div class=" text-start px-3 py-3 text-body-tertiary"><i class="bi bi-infinity"></i><span
@@ -358,49 +369,68 @@
             </div>
         </nav>
         <div class="content-page py-4 px-lg-0 px-xl-5 mx-md-5 d-flex flex-column">
-            <div class="content-title d-flex justify-content-between align-items-center flex-column px-xxl-5 px-xl-0">
-                <div class="title mb-4 px-2 w-100">
-                    <h2 class="fw-medium w-50">編輯產品</h2>
-                    <h6><span class="text-Dashboard">Dashboard</span>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbspOrder
-                        List</h6>
-                </div>
-                <div class="order w-100 mb-5 px-2 ">
-                    <div class="card p-5 border-0 o-card">
-                        <div class="top d-flex flex-column gap-5">
-                            <div class="d-flex gap-5">
-                                <span class="bg-primary-subtle px-3 py-2">產品名稱</span>
-                                <input type="text">
+            <form action="{{ route('product.update', ['id' => $product->id]) }}" method="POST"
+                enctype="multipart/form-data">
+                @csrf
+                <div
+                    class="content-title d-flex justify-content-between align-items-center flex-column px-xxl-5 px-xl-0">
+                    <div class="title mb-4 px-2 w-100">
+                        <h2 class="fw-medium w-50">編輯產品</h2>
+                        <h6><span class="text-Dashboard">Dashboard</span>
+                            &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;
+                            Order List
+                        </h6>
+                    </div>
+                    <div class="order w-100 mb-5 px-2 ">
+                        <div class="card p-5 border-0 o-card">
+                            <div class="top d-flex flex-column gap-5">
+                                <div class="d-flex gap-5">
+                                    <span class="bg-primary-subtle px-3 py-2">產品名稱*</span>
+                                    <input name="name" type="text" value="{{ $product->name }}" required>
+                                </div>
+                                <div class="d-flex gap-5">
+                                    <span class="bg-primary-subtle px-3 py-2">產品圖片*</span>
+                                    <img src="{{ asset($product->img_path) }}" alt="" class="w-15">
+                                    <input name="image" type="file" accept="image/*">
+                                </div>
+                                <div class="d-flex gap-5">
+                                    <span class="bg-primary-subtle px-3 py-2">產品價格*</span>
+                                    <input name="price" type="number" value="{{ $product->price }}" required>
+                                </div>
+                                <div class="d-flex gap-5 align-items-center">
+                                    <span class="bg-primary-subtle px-3 py-2">顯示狀態</span>
+                                    @if ($product->status == 1)
+                                        <label><input id="show" name="status" type="radio" value="1"
+                                                checked>&nbsp;顯示</label>
+                                        <label><input id="notshow" name="status" type="radio"
+                                                value="2">&nbsp;不顯示</label>
+                                    @else
+                                        <label><input id="show" name="status" type="radio"
+                                                value="1">&nbsp;顯示</label>
+                                        <label><input id="notshow" name="status" type="radio" value="2"
+                                                checked>&nbsp;不顯示</label>
+                                    @endif
+                                </div>
+                                <div class="d-flex gap-5">
+                                    <div class="bg-primary-subtle px-3 py-2">產品描述</div>
+                                    <textarea name="desc" class="w-100" style="resize:none; min-height:150px;">{{ $product->desc }}</textarea>
+                                </div>
                             </div>
-                            <div class="d-flex gap-5">
-                                <span class="bg-primary-subtle px-3 py-2">產品圖片</span>
-                                <input type="file">
+                            <div class="bottom btn-group mt-4 d-flex justify-content-evenly">
+                                <a href="{{ route('product.cart') }}">
+                                    <button type="button" class="btn-lg bg-primary-subtle py-2 px-3">取消按鈕</button>
+                                </a>
+                                <button type="submit" class="btn-lg bg-primary-subtle py-2 px-3">儲存按鈕</button>
                             </div>
-                            <div class="d-flex gap-5">
-                                <span class="bg-primary-subtle px-3 py-2">產品價格</span>
-                                <input type="number">
-                            </div>
-                            <div class="d-flex gap-5 align-items-center">
-                                <span class="bg-primary-subtle px-3 py-2">顯示狀態</span>
-                                <div>顯示&nbsp;<input type="radio"></div>
-                                <div>不顯示&nbsp;<input type="radio"></div>
-                            </div>
-                            <div class="d-flex gap-5">
-                                <span class="bg-primary-subtle px-3 py-2">產品描述</span>
-                                <input type="textarea">
-                            </div>
-                        </div>
-                        <div class="bottom btn-group mt-4 d-flex justify-content-evenly">
-                            <button type="button" class="btn-lg bg-primary-subtle py-2 px-3">取消按鈕</button>
-                            <a href="/order-list-1" class="btn-lg bg-primary-subtle py-2 px-3"><div>儲存按鈕</div></a>
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
     </div>
-    <script src="{{asset('./js/bootstrap.bundle.js')}}"></script>
-    <script src="{{asset('./js/js.js')}}"></script>
+    <script src="{{ asset('./js/bootstrap.bundle.js') }}"></script>
+    <script src="{{ asset('./js/js.js') }}"></script>
 </body>
 
 </html>

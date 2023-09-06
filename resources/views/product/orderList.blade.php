@@ -11,6 +11,12 @@
     <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <style>
+        .pagination {
+            justify-content: center;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -381,12 +387,15 @@
                     <div class="card p-0 border-0 o-card">
                         <div
                             class="card-header bg-white d-flex justify-content-between flex-column flex-md-row order-search py-4">
-                            <form class="d-flex position-relative">
+                            <form action="{{ route('product.cart') }}" method="GET"
+                                class="d-flex position-relative">
                                 <input class="form-control rounded-0 py-0 w-100" id="search-area" type="search"
-                                    placeholder="Search" aria-label="Search">
-                                <a href="{{ route('product.create') }}"
-                                    class="mx-2 bg-primary-subtle w-50 d-flex align-items-center justify-content-center">新增產品</a>
+                                    placeholder="Search" aria-label="Search" name="keyword"
+                                    value="{{ $keyword }}">
+                                <button class="btn btn-primary w-25" type="submit">搜尋</button>
                             </form>
+                            <a href="{{ route('product.create') }}"
+                                class="mx-2 bg-primary-subtle w-25 d-flex align-items-center justify-content-center">新增產品</a>
                             <div class="form-floating pt-3 pt-md-0">
                                 <select class="form-select py-0 ps-3 w-100" id="floatingSelect"
                                     aria-label="Floating label select example">
@@ -435,26 +444,24 @@
                                                     height="40" alt=""></th>
                                             <th>{{ $item->name }}</th>
                                             <th>{{ $item->desc }}</th>
-                                            <th>01 May 2023 (10:12 am)</th>
+                                            <th>{{ $item->created_at->format('Y-m-d') }}</th>
                                             <th>
                                                 @if ($item->status == 1)
-                                                    <span class="badge fw-bolder success">顯示</span>
+                                                    <span class="badge fw-bolder bg-success">顯示</span>
                                                 @else
-                                                    <span class="badge fw-bolder danger">不顯示</span>
+                                                    <span class="badge fw-bolder bg-danger">不顯示</span>
                                                 @endif
 
                                             </th>
                                             <th>{{ $item->price }}</th>
                                             <th>
-                                                <ul
-                                                    class="p-0 m-0 d-flex flex-column w-100 d-flex flex-column btn-group-sm w-100">
-                                                    <form action="">
-                                                        @csrf
-                                                        <div class="bg-primary-subtle mb-1 btn">
-                                                            <a href="#">Delete</a>
-                                                        </div>
+                                                <ul class="p-0 m-0 d-flex flex-column d-flex flex-column btn-group-sm w-100">
+                                                    <form action="{{ route('product.delete', ['id' => $item->id]) }}" method="POST">
+                                                            @csrf
+                                                            <button class="bg-primary-subtle mb-1 btn w-100" type="submit">Delete </button>
                                                     </form>
-                                                    <a href="{{ route('product.edit', ['id'=>$item->id]) }}" class="bg-primary-subtle btn btn">
+                                                    <a href="{{ route('product.edit', ['id' => $item->id]) }}"
+                                                        class="bg-primary-subtle btn">
                                                         <span>Edit</span>
                                                     </a>
                                                 </ul>
@@ -464,22 +471,8 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div
-                            class="card-footer order-page bg-white px-3 d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-between">
-                            <div>Showing 1 to 8 of 12 entries</div>
-                            <div aria-label="Page navigation">
-                                <ul class="pagination justify-content-end mt-3" id="page-item">
-                                    <li class="page-item disabled me-1">
-                                        <a class="page-link">Previous</a>
-                                    </li>
-                                    <li class="page-item me-1"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item me-1"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item me-1"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">Next</a>
-                                    </li>
-                                </ul>
-                            </div>
+                        <div>
+                            {{ $products->links() }}
                         </div>
                     </div>
                 </div>

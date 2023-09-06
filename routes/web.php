@@ -1,4 +1,5 @@
 <?php
+
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TypeController;
 use Illuminate\Support\Facades\Route;
@@ -18,15 +19,21 @@ use Illuminate\Support\Facades\Route;
 //     return view('product.website');
 // });
 
-Route::get('/', [ProductController::class, 'index']);
-Route::get('/cart', [ProductController::class, 'cart'])->name('product.cart');
 
-Route::get('/create', [ProductController::class, 'create'])->name('product.create');
-Route::post('/store', [ProductController::class, 'store'])->name('product.store');
+// 打包
+// Route::prefix('/product')->group(function () {
 
-Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
-Route::post('/update/{id}', [ProductController::class, 'update'])->name('product.update');
+    Route::get('/', [ProductController::class, 'index']);
+    Route::get('/cart', [ProductController::class, 'cart'])->name('product.cart');
 
-Route::post('/delete/{id}', [ProductController::class, 'destroy'])->name('product.delete');
+    Route::get('/create', [ProductController::class, 'create'])->name('product.create');
+    Route::post('/store', [ProductController::class, 'store'])->name('product.store');
 
-Route::resource('/type',TypeController::class);
+    Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
+    Route::post('/update/{id}', [ProductController::class, 'update'])->name('product.update');
+
+    Route::post('/delete/{id}', [ProductController::class, 'destroy'])->name('product.delete');
+// });
+
+
+Route::resource('/type', TypeController::class);
