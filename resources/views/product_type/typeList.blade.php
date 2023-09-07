@@ -1,5 +1,5 @@
 {{-- 連結的樣板 --}}
-@extends('layout.template')
+@extends('templates.template')
 {{-- 樣板裡放入的資料 --}}
 @section('content')
     <div class="content-page py-4 px-lg-0 px-xl-5 mx-md-5 d-flex flex-column">
@@ -51,7 +51,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (@types as @type)
+                                {{-- @foreach (@types as @type)
                                 <tr id="dataCol{{ $type->id }}">
                                     <th>
                                         <div class="form-check pt-2">
@@ -68,7 +68,7 @@
                                     <th>{{ $img->desc }}</th>
                                     <th>{{ $img->creat_at->format('Y-m-d') }}</th>
                                     <th>
-                                        <ul class="p-0 m-0 d-flex flex-column w-100 d-flex flex-column btn-group-sm w-100">
+                                        <ul class="p-0 m-0 d-flex flex-column w-100 d-flex flex-column btn-group-sm w-100"> --}}
                                             {{-- 寫法一 --}}
                                             {{-- <form action="{{ route('type.destroy',['type' => $type->id]) }}" method="POST" data-name="{{ $type->name }}">
                                                 @csrf
@@ -79,7 +79,7 @@
                                             </form> --}}
 
                                             {{-- 寫法二 --}}
-                                            <button class="bg-primary-subtle mb-1 btn" type="button" onclick="deleteData({{ $type->id }},{{ $type->name }})">
+                                            {{-- <button class="bg-primary-subtle mb-1 btn" type="button" onclick="deleteData({{ $type->id }},{{ $type->name }})">
                                                 <a href="#">Delete</a>
                                             </button>
                                                 <a href="/order-list-3" class="bg-primary-subtle btn btn">
@@ -90,7 +90,7 @@
 
                                     @endforeach
                                 </tr>
-                                @endforeach
+                                @endforeach --}}
                             </tbody>
                         </table>
                     </div>

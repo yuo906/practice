@@ -1,4 +1,4 @@
-@extends('layout.template')
+@extends('templates.template')
 @section('content')
     <div class="content-page py-4 px-lg-0 px-xl-5 mx-md-5 d-flex flex-column">
         <form action="{{ route('type.store') }}" method="POST" enctype="multipart/form-data">
@@ -14,15 +14,15 @@
                         <div class="top d-flex flex-column gap-5">
                             <div class="d-flex gap-5">
                                 <span class="bg-primary-subtle px-3 py-2">類別名稱</span>
-                                <input type="text">
+                                <input name="name" type="text">
                             </div>
                             <div class="d-flex gap-5">
                                 <span class="bg-primary-subtle px-3 py-2">類別圖片</span>
-                                <input type="file">
+                                <input name="image[]" type="file" multiple accept="image/*">
                             </div>
                             <div class="d-flex gap-5">
                                 <span class="bg-primary-subtle px-3 py-2">類別描述</span>
-                                <input type="textarea">
+                                <input name="desc" type="textarea">
                             </div>
                         </div>
                         <div class="bottom btn-group mt-4 d-flex justify-content-evenly">

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TypeController;
+use App\Http\Controllers\MessageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,3 +38,12 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::resource('/type', TypeController::class);
+
+Route::get('/message', [MessageController::class, 'index'])->name('message.index');
+Route::post('/message/create', [MessageController::class, 'create'])->name('message.create');
+Route::post('/message/store', [MessageController::class, 'store'])->name('message.store');
+
+Route::get('/message/edit/{id}', [MessageController::class, 'edit'])->name('message.edit');
+Route::post('/message/update/{id}', [MessageController::class, 'update'])->name('message.update');
+
+Route::post('/message/delete/{id}', [MessageController::class, 'destroy'])->name('message.delete');

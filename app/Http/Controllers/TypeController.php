@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Services\FileService;
+use App\Models\ProductType;
+use App\Models\ProductTypeImg;
 use Termwind\Components\Dd;
 
 class TypeController extends Controller
@@ -10,6 +13,11 @@ class TypeController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    public function __construct(protected FileService $fileService)
+    {
+    }
+
     public function index()
     {
         // $types = ProductType::get();,compact('types', 'typesImg')
@@ -29,20 +37,20 @@ class TypeController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
-        // $type = ProductType::create([
-        //     'name'=>$request->name,
-        //     'desc'=>$request->desc,
-        // ]);
+        // dd($request->all());
+        $type = ProductType::create([
+            'name'=>$request->name,
+            'desc'=>$request->desc,
+        ]);
 
-        // foreach($request->image ?? [] as $value){
-        //     ProductTypeImg::create([
-        //         'img_path' => $this -> fileService -> imgUpload($value -> 'type-image'),
-        //         'product_type_id' => $type -> id,
-        //     ]);
-        // }
+        foreach($request->image ?? [] as $value){
+            ProductTypeImg::create([
+                'img_path' => $this -> fileService -> imgUpload($value, 'type-image'),
+                'product_type_id' => $type -> id,
+            ]);
+        }
 
-        // return redirect(route('type.index'));
+        return redirect(route('type.index'));
     }
 
     /**
@@ -95,21 +103,22 @@ class TypeController extends Controller
 
     public function destroy(string $id)
     {
-        $type = ProductType::find($id);
-        if ($type) {
-            foreach ($type->productTypeImg ?? [] as $value) {
-                //     dd($value);
-                $this->fileService->deleteUpload($value->img_path);
-                $value->delete();
-            }
-            $type->delete();
+    //     $type = ProductType::find($id);
+    //     if ($type) {
+    //         foreach ($type->productTypeImg ?? [] as $value) {
+    //             //     dd($value);
+    //             $this->fileService->deleteUpload($value->img_path);
+    //             $value->delete();
+    //         }
+    //         $type->delete();
 
-        } else {
-            $result = 'fail'
+    //     } else {
+    //         $result = 'fail';
 
-        }
+    //     }
 
-        return $result;
-        // return redirect(route('type.index'));
-    }
+    //     return $result;
+    //     // return redirect(route('type.index'));
+    // }
+}
 }
