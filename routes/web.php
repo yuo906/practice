@@ -70,3 +70,4 @@ Route::prefix('/message')->group(function () {
 
 
 Route::middleware('auth')->get('/userinfo', [FrontController::class, 'user_info'])->name('userinfo');
+Route::middleware('auth')->post('/userinfo/update', [FrontController::class, 'user_info_update'])->name('userinfo.update');

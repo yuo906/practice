@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
     <link rel="stylesheet" href="{{ asset('css/website.css') }}">
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('img/favicon.ico') }}">
+    <link rel="stylesheet" href="sweetalert2.min.css">
+
     <style>
         * {
             box-sizing: border-box;
@@ -995,9 +997,10 @@
         </footer>
     </div>
 
-    @yield('js')
+
 
     <script src="./js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <!-- Initialize Swiper -->
     <script>
@@ -1143,7 +1146,7 @@
             })
         }
     </script>
-
+    @yield('js')
 </body>
 
 </html>
