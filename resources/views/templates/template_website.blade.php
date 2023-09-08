@@ -8,13 +8,9 @@
 
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v6.0.0-beta3/css/all.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
     <link rel="stylesheet" href="{{ asset('css/website.css') }}">
-
-
-
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('img/favicon.ico') }}">
     <style>
         * {
@@ -155,15 +151,17 @@
                         </div>
                     </div>
                     <div class="d-flex align-items-center">
-                        <i class="fa-light fa-heart me-3 position-relative d-none d-lg-block" style="color: #87939a;">
-                            <span
-                                class="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-success">
-                                5
-                            </span>
-                        </i>
-
+                        <a href="{{ route('product.cart') }}">
+                            <i class="fa-light fa-heart me-3 position-relative d-none d-lg-block"
+                                style="color: #87939a;">
+                                <span
+                                    class="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-success">
+                                    5
+                                </span>
+                            </i>
+                        </a>
                         <button class="user me-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            <a href="{{ route('product.cart') }}">
+                            <a href="{{ route('userinfo') }}">
                                 <i class="fa-light fa-user" style="color: #859198;"></i>
                             </a>
                         </button>
@@ -178,6 +176,7 @@
                             </i>
                         </button>
 
+                        {{-- Shop Cart --}}
                         <div class="offcanvas offcanvas-end offcanvas-right" tabindex="-1" id="offcanvasRight"
                             aria-labelledby="offcanvasRightLabel">
 
@@ -343,6 +342,7 @@
                             <img class="menu" src="./img/menu.png" alt="">
                         </button>
 
+                        {{-- besides nav --}}
                         <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1"
                             id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
                             <div class="offcanvas-header">
@@ -560,8 +560,7 @@
                                     </li>
 
                                     <li class="border-bottom py-3 position-relative">
-                                        <a class="text-dark" href="#dashboard"
-                                            data-bs-toggle="collapse">Dashboard
+                                        <a class="text-dark" href="#dashboard" data-bs-toggle="collapse">Dashboard
                                         </a>
                                     </li>
 
@@ -597,8 +596,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="navbar navbar-expand-lg py-4 d-none d-lg-flex">
 
+                {{-- All Departments --}}
+                <div class="navbar navbar-expand-lg py-4 d-none d-lg-flex">
                     <div class="dropdown">
                         <a class="dropdown dropbtn rounded-3 bg-success2 text-white px-4 me-3 py-2" type="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
@@ -616,6 +616,7 @@
                         </ul>
                     </div>
 
+                    {{-- navbar-nav --}}
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item dropdown dropbtn me-1">
                             <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown"
@@ -983,10 +984,10 @@
                 </div>
                 <div>
                     <span>Follow us on</span>
-                    <span class="follow border border-secondary-subtle rounded-3 p-1"><i
-                            class="fa-brands fa-facebook" style="color: #889397;"></i></span>
-                    <span class="follow border border-secondary-subtle rounded-3 p-1"><i
-                            class="fa-brands fa-twitter" style="color: #889397;"></i></span>
+                    <span class="follow border border-secondary-subtle rounded-3 p-1"><i class="fa-brands fa-facebook"
+                            style="color: #889397;"></i></span>
+                    <span class="follow border border-secondary-subtle rounded-3 p-1"><i class="fa-brands fa-twitter"
+                            style="color: #889397;"></i></span>
                     <span class="follow border border-secondary-subtle rounded-3 p-1"><i
                             class="fa-brands fa-instagram" style="color: #889397;"></i></span>
                 </div>
@@ -995,7 +996,7 @@
     </div>
 
     @yield('js')
-    
+
     <script src="./js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <!-- Initialize Swiper -->
@@ -1056,66 +1057,66 @@
     </script>
 
     <script>
-    //     // Set the date we're counting down to
-    //     var countDownDate = new Date("Dec 9, 2028 15:37:25").getTime();
-    //     var countDownDate2 = new Date("Nov 11, 2028 15:37:25").getTime();
-    //     var countDownDate3 = new Date("Oct 10, 2028 15:37:25").getTime();
+        //     // Set the date we're counting down to
+        //     var countDownDate = new Date("Dec 9, 2028 15:37:25").getTime();
+        //     var countDownDate2 = new Date("Nov 11, 2028 15:37:25").getTime();
+        //     var countDownDate3 = new Date("Oct 10, 2028 15:37:25").getTime();
 
-    //     // Update the count down every 1 second
-    //     var x = setInterval(function() {
+        //     // Update the count down every 1 second
+        //     var x = setInterval(function() {
 
-    //         // Get today's date and time
-    //         var now = new Date().getTime();
+        //         // Get today's date and time
+        //         var now = new Date().getTime();
 
-    //         // Find the distance between now and the count down date
-    //         var distance = countDownDate - now;
-    //         var distance2 = countDownDate2 - now;
-    //         var distance3 = countDownDate3 - now;
+        //         // Find the distance between now and the count down date
+        //         var distance = countDownDate - now;
+        //         var distance2 = countDownDate2 - now;
+        //         var distance3 = countDownDate3 - now;
 
-    //         // Time calculations for days, hours, minutes and seconds
-    //         var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    //         var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    //         var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    //         var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        //         // Time calculations for days, hours, minutes and seconds
+        //         var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        //         var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        //         var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        //         var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    //         var days2 = Math.floor(distance2 / (1000 * 60 * 60 * 24));
-    //         var hours2 = Math.floor((distance2 % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    //         var minutes2 = Math.floor((distance2 % (1000 * 60 * 60)) / (1000 * 60));
-    //         var seconds2 = Math.floor((distance2 % (1000 * 60)) / 1000);
+        //         var days2 = Math.floor(distance2 / (1000 * 60 * 60 * 24));
+        //         var hours2 = Math.floor((distance2 % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        //         var minutes2 = Math.floor((distance2 % (1000 * 60 * 60)) / (1000 * 60));
+        //         var seconds2 = Math.floor((distance2 % (1000 * 60)) / 1000);
 
-    //         var days3 = Math.floor(distance3 / (1000 * 60 * 60 * 24));
-    //         var hours3 = Math.floor((distance3 % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    //         var minutes3 = Math.floor((distance3 % (1000 * 60 * 60)) / (1000 * 60));
-    //         var seconds3 = Math.floor((distance3 % (1000 * 60)) / 1000);
+        //         var days3 = Math.floor(distance3 / (1000 * 60 * 60 * 24));
+        //         var hours3 = Math.floor((distance3 % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        //         var minutes3 = Math.floor((distance3 % (1000 * 60 * 60)) / (1000 * 60));
+        //         var seconds3 = Math.floor((distance3 % (1000 * 60)) / 1000);
 
-    //         // Output the result in an element with id="demo"
-    //         document.getElementById("timer").innerHTML = `
+        //         // Output the result in an element with id="demo"
+        //         document.getElementById("timer").innerHTML = `
     //   <div class="day time d-flex flex-column align-items-center">${days}<p class="text-muted">Days</p></div>
     //   <div class="hour time d-flex flex-column align-items-center">${hours}<p class="text-muted">Hours</p></div>
     //   <div class="min time d-flex flex-column align-items-center">${minutes}<p class="text-muted">Mins</p></div>
     //   <div class="sec time d-flex flex-column align-items-center">${seconds}<p class="text-muted">Sec</p></div>
     // `;
 
-    //         document.getElementById("timer2").innerHTML = `
+        //         document.getElementById("timer2").innerHTML = `
     //   <div class="day time d-flex flex-column align-items-center">${days2}<p class="text-muted">Days</p></div>
     //   <div class="hour time d-flex flex-column align-items-center">${hours2}<p class="text-muted">Hours</p></div>
     //   <div class="min time d-flex flex-column align-items-center">${minutes2}<p class="text-muted">Mins</p></div>
     //   <div class="sec time d-flex flex-column align-items-center">${seconds2}<p class="text-muted">Sec</p></div>
     // `;
 
-    //         document.getElementById("timer3").innerHTML = `
+        //         document.getElementById("timer3").innerHTML = `
     //   <div class="day time d-flex flex-column align-items-center">${days3}<p class="text-muted">Days</p></div>
     //   <div class="hour time d-flex flex-column align-items-center">${hours3}<p class="text-muted">Hours</p></div>
     //   <div class="min time d-flex flex-column align-items-center">${minutes3}<p class="text-muted">Mins</p></div>
     //   <div class="sec time d-flex flex-column align-items-center">${seconds3}<p class="text-muted">Sec</p></div>
     // `;
 
-    //         // If the count down is over, write some text
-    //         if (distance < 0) {
-    //             clearInterval(x);
-    //             document.getElementById("timer").innerHTML = "EXPIRED";
-    //         }
-    //     }, 1000);
+        //         // If the count down is over, write some text
+        //         if (distance < 0) {
+        //             clearInterval(x);
+        //             document.getElementById("timer").innerHTML = "EXPIRED";
+        //         }
+        //     }, 1000);
     </script>
 
 

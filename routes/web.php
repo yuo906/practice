@@ -5,6 +5,7 @@ use App\Http\Controllers\TypeController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FrontController;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,3 +67,6 @@ Route::prefix('/message')->group(function () {
     Route::delete('/delete/{id}', [MessageController::class, 'destroy'])->name('message.delete');
     Route::delete('/deleteResponse/{id}', [MessageController::class, 'destroyResponse'])->name('message.deleteResponse');
 });
+
+
+Route::middleware('auth')->get('/userinfo', [FrontController::class, 'user_info'])->name('userinfo');
