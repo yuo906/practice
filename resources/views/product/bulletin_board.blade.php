@@ -8,14 +8,19 @@
                 <div class="border my-3 p-3 w-100">
                     <div class="d-flex flex-column align-items-start mb-3">
                         <div class="d-flex justify-content-between w-100 my-3">
-                            <span class="fs-3">{{ $item->id }}樓&nbsp;:&nbsp;{{ $item->content }}</span>
+                            <span id="message" class="fs-3">留言&nbsp;:&nbsp;{{ $item->content }}</span>
                             <div class="d-flex">
-                                <a href="">
-                                    <button class="btn btn-outline-success me-1">編輯</button>
-                                </a>
-                                {{-- <form action="{{ route('message.delete') }}" method="POST"> --}}
+                                <form action="{{ route('message.update', ['id' => $item->id]) }}" method="POST">
+                                    @csrf
+                                    <input name="content" class="me-3" type="text">
+                                    <button class="btn btn-outline-success me-1" type="submit">編輯</button>
+                                </form>
+
+                                <form action="{{ route('message.delete', ['id' => $item->id]) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
                                     <button type="submit" class="btn btn-outline-success">刪除</button>
-                                {{-- </form> --}}
+                                </form>
                             </div>
                         </div>
                         {{-- @dd($item->message) --}}
@@ -23,12 +28,18 @@
                             <div class="d-flex justify-content-between w-100 ">
                                 <span class="fs-5 ms-5">回覆&nbsp;:&nbsp;{{ $response->response }}</span>
                                 <div class="d-flex">
-                                    <a href="">
-                                        <button class="btn btn-outline-success me-1">編輯</button>
-                                    </a>
-                                    {{-- <form action="{{ route('message.delete') }}" method="POST"> --}}
+
+                                    <form action="{{ route('message.updateResponse', ['id' => $response->id]) }}" method="POST">
+                                        @csrf
+                                        <input name="response" class="me-3" type="text">
+                                        <button class="btn btn-outline-success me-1" type="submit">編輯</button>
+                                    </form>
+
+                                    <form action="{{ route('message.deleteResponse', ['id' => $response->id]) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
                                         <button type="submit" class="btn btn-outline-success">刪除</button>
-                                    {{-- </form> --}}
+                                    </form>
                                 </div>
                             </div>
                         @endforeach
@@ -59,7 +70,21 @@
     </main>
 @endsection
 
+
+
+
+
+
 @section('js')
+    <script>
+        function editMessage(id) {
+            let message = document.querySelector(`span#message${id}`);
+            message.style.display = 'none';
+        }
+    </script>
+
+
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         function deleteResponse(id) {

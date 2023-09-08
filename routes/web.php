@@ -17,13 +17,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('product.website');
-// });
-
 Route::get('/', function () {
-    return view('welcome');
+    return view('product.website');
 });
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -37,29 +37,32 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__ . '/auth.php';
 
-Route::get('/', [ProductController::class, 'index']);
-Route::get('/cart', [ProductController::class, 'cart'])->name('product.cart');
+// Route::middleware('auth')->prefix('/product')->group(function () {
+    Route::get('/', [ProductController::class, 'index']);
+    Route::get('/cart', [ProductController::class, 'cart'])->name('product.cart');
 
-Route::get('/create', [ProductController::class, 'create'])->name('product.create');
-Route::post('/store', [ProductController::class, 'store'])->name('product.store');
+    Route::get('/create', [ProductController::class, 'create'])->name('product.create');
+    Route::post('/store', [ProductController::class, 'store'])->name('product.store');
 
-Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
-Route::post('/update/{id}', [ProductController::class, 'update'])->name('product.update');
+    Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
+    Route::post('/update/{id}', [ProductController::class, 'update'])->name('product.update');
 
-Route::post('/delete/{id}', [ProductController::class, 'destroy'])->name('product.delete');
-
+    Route::post('/delete/{id}', [ProductController::class, 'destroy'])->name('product.delete');
+// });
 
 
 Route::resource('/type', TypeController::class);
 
-Route::get('/message', [MessageController::class, 'index'])->name('message.index');
-Route::post('/message/create', [MessageController::class, 'create'])->name('message.create');
-Route::post('/message/store', [MessageController::class, 'store'])->name('message.store');
+// Route::middleware('auth')->
+Route::prefix('/message')->group(function () {
+    Route::get('/', [MessageController::class, 'index'])->name('message.index');
+    Route::post('/create', [MessageController::class, 'create'])->name('message.create');
+    Route::post('/store', [MessageController::class, 'store'])->name('message.store');
 
-Route::get('/message/edit/{id}', [MessageController::class, 'edit'])->name('message.edit');
-Route::post('/message/update/{id}', [MessageController::class, 'update'])->name('message.update');
+    Route::get('/edit/{id}', [MessageController::class, 'edit'])->name('message.edit');
+    Route::post('/update/{id}', [MessageController::class, 'update'])->name('message.update');
+    Route::post('/updateResponse/{id}', [MessageController::class, 'updateResponse'])->name('message.updateResponse');
 
-Route::post('/message/delete/{id}', [MessageController::class, 'destroy'])->name('message.delete');
-
-
-
+    Route::delete('/delete/{id}', [MessageController::class, 'destroy'])->name('message.delete');
+    Route::delete('/deleteResponse/{id}', [MessageController::class, 'destroyResponse'])->name('message.deleteResponse');
+});

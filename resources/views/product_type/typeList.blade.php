@@ -51,46 +51,52 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {{-- @foreach (@types as @type)
-                                <tr id="dataCol{{ $type->id }}">
-                                    <th>
-                                        <div class="form-check pt-2">
-                                            <label class="form-check-label" for="check1">
-                                                <input class="form-check-input checkbox" type="checkbox" value="" id="check1">
-                                            </label>
-                                        </div>
-                                    </th>
-                                    @foreach ($type->productTypeImg ?? [] as $img)
-                                    <th>
-                                        <img src="{{ asset($img->img_path) }}" width="40" height="40" alt="">
-                                    </th>
-                                    <th>{{ $img->name }}</th>
-                                    <th>{{ $img->desc }}</th>
-                                    <th>{{ $img->creat_at->format('Y-m-d') }}</th>
-                                    <th>
-                                        <ul class="p-0 m-0 d-flex flex-column w-100 d-flex flex-column btn-group-sm w-100"> --}}
-                                            {{-- 寫法一 --}}
-                                            {{-- <form action="{{ route('type.destroy',['type' => $type->id]) }}" method="POST" data-name="{{ $type->name }}">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button class="bg-primary-subtle mb-1 btn" type="submit">
-                                                    <a href="#">Delete</a>
+                                @foreach ($types as $type)
+                                    {{-- @dd($type->productTypeImg) --}}
+                                    <tr id="dataCol{{ $type->id }}">
+                                        <th>
+                                            <div class="form-check pt-2">
+                                                <label class="form-check-label" for="check1">
+                                                    <input class="form-check-input checkbox" type="checkbox" value=""
+                                                        id="check1">
+                                                </label>
+                                            </div>
+                                        </th>
+                                        <th>
+                                            @foreach ($type->productTypeImg ?? [] as $img)
+                                                <img src="{{ asset($img->img_path) }}" width="40" height="40"
+                                                    alt="">
+                                            @endforeach
+                                        </th>
+                                        <th>{{ $type->name }}</th>
+                                        <th>{{ $type->desc }}</th>
+                                        <th>{{ $type->created_at->format('Y-m-d') }}</th>
+                                        <th>
+                                            <ul
+                                                class="p-0 m-0 d-flex flex-column w-100 d-flex flex-column btn-group-sm w-100">
+                                                <button class="bg-primary-subtle mb-1 btn" type="button">
+                                                    <a href="{{ route('type.edit', ['type' => $type->id]) }}">Edit</a>
                                                 </button>
-                                            </form> --}}
 
-                                            {{-- 寫法二 --}}
-                                            {{-- <button class="bg-primary-subtle mb-1 btn" type="button" onclick="deleteData({{ $type->id }},{{ $type->name }})">
-                                                <a href="#">Delete</a>
-                                            </button>
-                                                <a href="/order-list-3" class="bg-primary-subtle btn btn">
-                                                    <span>Edit</span>
-                                                </a>
+                                                {{-- 寫法一 --}}
+                                                {{-- <form action="{{ route('type.destroy', ['type' => $type->id]) }}"
+                                                    method="POST" data-name="{{ $type->name }}">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="bg-primary-subtle mb-1 btn" type="submit">Delete</button>
+                                                </form> --}}
+
+                                                {{-- 寫法二 --}}
+                                                <button class="bg-primary-subtle mb-1 btn" type="button" onclick="deleteType({{ $type->id }})">Delete</button>
+
+                                                {{-- <button class="bg-primary-subtle mb-1 btn" type="button"
+                                                    onclick="deleteData({{ $type->id }},{{ $type->name }})">
+                                                    Delete
+                                                </button> --}}
                                             </ul>
-                                    </th>
-
-                                    @endforeach
-                                </tr>
-                                @endforeach --}}
+                                        </th>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -119,68 +125,69 @@
 
 
 @section('js')
-        <script>
-            // 寫法一
-            function deleteType(id) {
-                const formData = new FormData();
-                formData.append('_token', '{{ csrf_token() }}')
-                fetch(`/type/${id}`, {
-                    method: "delete",
-                    body: formData
-                });
+    <script>
+        // 寫法一
+        function deleteType(id) {
+            console.log(id);
+            const formData = new FormData();
+            formData.append('_token', '{{ csrf_token() }}')
+            fetch(`/type/${id}`, {
+                method: "delete",
+                body: formData,
+            });
 
-                const forms = document.querySelectorAll('th ul form');
-                forms.forEach(element => {
-                    element.addEventListener('submit',(event) => {
-                        event.preventDefault();
-                        Swal.fire({
-                            title:`確認要刪除${element.dataset.name}資料嗎?`,
-                            showDenyButton: true,
-                            confirmButtonText:'取消',
-                            denyButtonText:'刪除',
-                        }).then(result) => {
-                            if(result.isConfirm){
+            // const forms = document.querySelectorAll('th ul form');
+            // forms.forEach(element => {
+            //     element.addEventListener('submit', (event) => {
+            //         event.preventDefault();
+            //         Swal.fire({
+            //             title: `確認要刪除${element.dataset.name}資料嗎?`,
+            //             showDenyButton: true,
+            //             confirmButtonText: '取消',
+            //             denyButtonText: '刪除',
+            //         }).then(result) => {
+            //             if (result.isConfirm) {
 
-                            } else if(result.isDenied){
-                                element.submit();
-                            }
-                        }
-                    });
-                });
-            }
+            //             } else if (result.isDenied) {
+            //                 element.submit();
+            //             }
+            //         }
+            //     });
+            // });
+        }
 
-            // 寫法二
-            function deleteData(id,name) {
-                // console.log(id);
-                const formData = new FormData();
-                formData.append('_token', '{{ csrf_token()}}');
-                formData.append('_method','DELETE');
-                Swal.fire({
-                    title:`確認要刪除${name}資料嗎?`,
-                    showDenyButton: true,
-                    confirmButtonText:'取消',
-                    denyButtonText:'刪除',
-                }).then(result) => {
-                    if(result.isDenied){
-                        fetch(`/type/${id}`,{
-                            method:'post',
-                            body:formData,
-                        }).then((res) => {
-                                return res.text();
-                            }).then((data) =>{
-                                if (data=='success'){
-                                    const tr =document.querySelector(`tr#dataCol${id}`);
-                                    tr.remove();
-                                } else {
-                                    Swal.fire({
-                                        icon:'error',
-                                        title:'刪除失敗',
-                                        text:'查無資料'
-                                    });
-                                }
+        // 寫法二
+        function deleteData(id, name) {
+            // console.log(id);
+            const formData = new FormData();
+            formData.append('_token', '{{ csrf_token() }}');
+            formData.append('_method', 'DELETE');
+            Swal.fire({
+                title: `確認要刪除${name}資料嗎?`,
+                showDenyButton: true,
+                confirmButtonText: '取消',
+                denyButtonText: '刪除',
+            }).then(result) => {
+                if (result.isDenied) {
+                    fetch(`/type/${id}`, {
+                        method: 'post',
+                        body: formData,
+                    }).then((res) => {
+                        return res.text();
+                    }).then((data) => {
+                        if (data == 'success') {
+                            const tr = document.querySelector(`tr#dataCol${id}`);
+                            tr.remove();
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: '刪除失敗',
+                                text: '查無資料'
                             });
                         }
-                    }
+                    });
+                }
             }
-        </script>
-    @endsection
+        }
+    </script>
+@endsection

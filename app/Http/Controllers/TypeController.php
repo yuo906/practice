@@ -20,8 +20,16 @@ class TypeController extends Controller
 
     public function index()
     {
-        // $types = ProductType::get();,compact('types', 'typesImg')
-        return view('product_type.typeList');
+        // 看關聯
+        // $types = ProductType::with('productTypeImg')->first();
+        // dd($types);
+        // 看關聯
+        // $typesImg = ProductTypeImg::with('productType')->first();
+        // dd($typesImg);
+        $types = ProductType::get();
+        // $typesImg = ProductTypeImg::get();
+        // return view('product_type.typeList', compact('types', 'typesImg'));
+        return view('product_type.typeList', compact('types'));
     }
 
     /**
@@ -39,14 +47,14 @@ class TypeController extends Controller
     {
         // dd($request->all());
         $type = ProductType::create([
-            'name'=>$request->name,
-            'desc'=>$request->desc,
+            'name' => $request->name,
+            'desc' => $request->desc,
         ]);
 
-        foreach($request->image ?? [] as $value){
+        foreach ($request->image ?? [] as $value) {
             ProductTypeImg::create([
-                'img_path' => $this -> fileService -> imgUpload($value, 'type-image'),
-                'product_type_id' => $type -> id,
+                'img_path' => $this->fileService->imgUpload($value, 'type-image'),
+                'product_type_id' => $type->id,
             ]);
         }
 
@@ -66,8 +74,9 @@ class TypeController extends Controller
      */
     public function edit(string $id)
     {
-        // $type = ProductType::find($id);
-        // return view('product_type.typeList_edit',compact('type'));
+        // dd($id);
+        $type = ProductType::find($id);
+        return view('product_type.typeList_edit', compact('type'));
     }
 
     /**
@@ -75,24 +84,30 @@ class TypeController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        // $type = ProductType::find($id);
-        // $type->update([
-        //     'name'=>$request -> name,
-        //     'desc'=>$request -> desc,
-        // ]);
+        // dd($request->hasFile('image'));
+        $type = ProductType::find($id);
+        $type->update([
+            'name' => $request->name,
+            'desc' => $request->desc,
+        ]);
 
-        // if($request->hasfile('image')){
-        //     foreach($type->productTypeImg ?? [] as $value) {
-        //         $this -> fileService ->deleteUpload($value->img_path);
-        //         $value -> delete();
-        //     }
-        //     foreach($request->image ??[] as $value){
-        //         ProductTypeImg::create([
-        //             'img_path' => $this -> fileService -> imgUpload($value,'type-image'),
-        //             'product_type_id' => $id,
-        //         ]);
-        //     }
-        // }
+        if ($request->hasfile('image')) {
+            foreach ($type->productTypeImg ?? [] as $value) {
+                // dump($value);
+                // 先刪圖片路徑 在刪資料
+                $this->fileService->deleteUpload($value->img_path);
+                $value->delete();
+            }
+            // dd(123);
+            foreach ($request->image ?? [] as $value) {
+                ProductTypeImg::create([
+                    'img_path' => $this->fileService->imgUpload($value, 'type-image'),
+                    'product_type_id' => $id,
+                ]);
+            }
+        }
+
+        return redirect(route('type.index'));
     }
 
     /**
@@ -103,22 +118,23 @@ class TypeController extends Controller
 
     public function destroy(string $id)
     {
-    //     $type = ProductType::find($id);
-    //     if ($type) {
-    //         foreach ($type->productTypeImg ?? [] as $value) {
-    //             //     dd($value);
-    //             $this->fileService->deleteUpload($value->img_path);
-    //             $value->delete();
-    //         }
-    //         $type->delete();
+        $type = ProductType::find($id);
+        //     if ($type) {
+        // 附表資料刪除
+        foreach ($type->productTypeImg ?? [] as $value) {
+            // dd($value);
+            $this->fileService->deleteUpload($value->img_path);
+            $value->delete();
+        }
+        // 主表資料刪除
+        $type->delete();
 
-    //     } else {
-    //         $result = 'fail';
+        //     } else {
+        //         $result = 'fail';
+        // }
 
-    //     }
-
-    //     return $result;
-    //     // return redirect(route('type.index'));
-    // }
-}
+        //     return $result;
+        return redirect(route('type.index'));
+        // }
+    }
 }

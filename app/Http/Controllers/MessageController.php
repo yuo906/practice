@@ -14,8 +14,7 @@ class MessageController extends Controller
     public function index()
     {
         $contents = Message::all();
-        $responses = Response::all();
-        return view('product.bulletin_board', compact('contents', 'responses'));
+        return view('product.bulletin_board', compact('contents'));
     }
 
     /**
@@ -37,37 +36,22 @@ class MessageController extends Controller
     {
         // dd($request->all());
 
-
-        // if ($request->content ?? '') {
-
-
-
-        // } else {
             Response::create([
                 'response' => $request->response,
                 'message_id' => $request->id,
             ]);
-        // }
-        // dd($response);
-        // }
 
         return redirect(route('message.index'));
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+
+        // dd($content);
+
     }
 
     /**
@@ -75,7 +59,24 @@ class MessageController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // dd($request->all());
+        $contents = Message::find($id);
+        $contents->update([
+            'content' => $request->content,
+        ]);
+        // dd($contents);
+        return redirect(route('message.index', compact('contents')));
+    }
+
+    public function updateResponse(Request $request, string $id)
+    {
+        $response = Response::find($id);
+
+        $response->update([
+            'response' => $request->response,
+        ]);
+        // dd($response);
+        return redirect(route('message.index'));
     }
 
     /**
@@ -83,7 +84,23 @@ class MessageController extends Controller
      */
     public function destroy(string $id)
     {
-        dd($id);
-        
+        // dd($id);
+        $contents = Message::find($id);
+        foreach ($contents->message ?? [] as $value) {
+            // dd($value);
+            $value->delete();
+        }
+        $contents->delete();
+
+        return redirect(route('message.index'));
+    }
+
+    public function destroyResponse(string $id)
+    {
+        $response = Response::find($id);
+        // dd($response);
+        $response->delete();
+
+        return redirect(route('message.index'));
     }
 }
