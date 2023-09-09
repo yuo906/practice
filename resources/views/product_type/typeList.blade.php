@@ -83,11 +83,13 @@
                                                     method="POST" data-name="{{ $type->name }}">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button class="bg-primary-subtle mb-1 btn" type="submit">Delete</button>
+                                                    <button class="bg-primary-subtle mb-1 btn"
+                                                        type="">Delete</button>
                                                 </form> --}}
 
                                                 {{-- 寫法二 --}}
-                                                <button class="bg-primary-subtle mb-1 btn" type="button" onclick="deleteType({{ $type->id }})">Delete</button>
+                                                <button class="bg-primary-subtle mb-1 btn" type="button"
+                                                    onClick="deleteType({{ $type->id }})">Delete</button>
 
                                                 {{-- <button class="bg-primary-subtle mb-1 btn" type="button"
                                                     onclick="deleteData({{ $type->id }},{{ $type->name }})">
@@ -127,16 +129,60 @@
 @section('js')
     <script>
         // 寫法一
+        // deleteType();
         function deleteType(id) {
-            console.log(id);
-            const formData = new FormData();
-            formData.append('_token', '{{ csrf_token() }}')
-            fetch(`/type/${id}`, {
-                method: "delete",
-                body: formData,
-            });
 
+            let dataColname = document.querySelector(`tr#dataCol${id} :nth-of-type(3)`);
+            Swal.fire({
+                title: `確認要刪除${dataColname.innerHTML}資料嗎?`,
+                showDenyButton: true,
+                confirmButtonText: '取消',
+                denyButtonText: '刪除',
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    Swal.fire('Saved!', '', 'success')
+                } else if (result.isDenied) {
+                    const formData = new FormData();
+                    formData.append('_token', '{{ csrf_token() }}');
+                    formData.append('_method', 'delete');
+                    fetch(`/type/${id}`, {
+                        method: "POST",
+                        body: formData,
+                    });
+
+                    let dataCol = document.querySelector(`tr#dataCol${id}`);
+                    dataCol.remove();
+                    // Swal.fire('Changes are not saved', '', 'info')
+                }
+            })
+
+            // let dataColname = document.querySelector(`tr#dataCol${id} :nth-of-type(3)`);
+            // // console.log( document.querySelector(`tr#dataCol${id} :nth-of-type(3)`))
+            // Swal.fire({
+            //     title: `確認要刪除${dataColname.innerHTML}資料嗎?`,
+            //     showDenyButton: true,
+            //     confirmButtonText: '取消',
+            //     denyButtonText: '刪除',
+            // }).then(result) => {
+            //     console.log(id);
+            // //     if (result.isDenied) {
+            //         // const formData = new FormData();
+            //         // formData.append('_token', '{{ csrf_token() }}');
+            //         // formData.append('_method', 'delete');
+            //         // fetch(`/type/${id}`, {
+            //         //     method: "delete",
+            //         //     body: formData,
+            //         // });
+            //         // element.submit();
+            // //     }
+            // //     if (result.isConfirmed) {
+
+            // //     }
+            // }
+            // 先跳視窗
             // const forms = document.querySelectorAll('th ul form');
+            // console.log(forms);
             // forms.forEach(element => {
             //     element.addEventListener('submit', (event) => {
             //         event.preventDefault();
@@ -146,48 +192,59 @@
             //             confirmButtonText: '取消',
             //             denyButtonText: '刪除',
             //         }).then(result) => {
-            //             if (result.isConfirm) {
-
-            //             } else if (result.isDenied) {
+            //             if (result.isDenied) {
+            //                 const formData = new FormData();
+            //                 formData.append('_token', '{{ csrf_token() }}');
+            //                 fetch(`/type/${id}`, {
+            //                     method: "delete",
+            //                     body: formData,
+            //                 });
             //                 element.submit();
+            //             }
+            //             if (result.isConfirmed) {
+
             //             }
             //         }
             //     });
             // });
+
         }
 
+
+
+
         // 寫法二
-        function deleteData(id, name) {
-            // console.log(id);
-            const formData = new FormData();
-            formData.append('_token', '{{ csrf_token() }}');
-            formData.append('_method', 'DELETE');
-            Swal.fire({
-                title: `確認要刪除${name}資料嗎?`,
-                showDenyButton: true,
-                confirmButtonText: '取消',
-                denyButtonText: '刪除',
-            }).then(result) => {
-                if (result.isDenied) {
-                    fetch(`/type/${id}`, {
-                        method: 'post',
-                        body: formData,
-                    }).then((res) => {
-                        return res.text();
-                    }).then((data) => {
-                        if (data == 'success') {
-                            const tr = document.querySelector(`tr#dataCol${id}`);
-                            tr.remove();
-                        } else {
-                            Swal.fire({
-                                icon: 'error',
-                                title: '刪除失敗',
-                                text: '查無資料'
-                            });
-                        }
-                    });
-                }
-            }
-        }
+        // function deleteData(id, name) {
+        //     // console.log(id);
+        //     const formData = new FormData();
+        //     formData.append('_token', '{{ csrf_token() }}');
+        //     formData.append('_method', 'DELETE');
+        //     Swal.fire({
+        //         title: `確認要刪除${name}資料嗎?`,
+        //         showDenyButton: true,
+        //         confirmButtonText: '取消',
+        //         denyButtonText: '刪除',
+        //     }).then(result) => {
+        //         if (result.isDenied) {
+        //             fetch(`/type/${id}`, {
+        //                 method: 'post',
+        //                 body: formData,
+        //             }).then((res) => {
+        //                 return res.text();
+        //             }).then((data) => {
+        //                 if (data == 'success') {
+        //                     const tr = document.querySelector(`tr#dataCol${id}`);
+        //                     tr.remove();
+        //                 } else {
+        //                     Swal.fire({
+        //                         icon: 'error',
+        //                         title: '刪除失敗',
+        //                         text: '查無資料'
+        //                     });
+        //                 }
+        //             });
+        //         }
+        //     }
+        // }
     </script>
 @endsection

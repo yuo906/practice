@@ -4,6 +4,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CheckOutController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FrontController;
 
@@ -39,16 +40,16 @@ Route::middleware('auth')->group(function () {
 require __DIR__ . '/auth.php';
 
 // Route::middleware('auth')->prefix('/product')->group(function () {
-    Route::get('/', [ProductController::class, 'index']);
-    Route::get('/cart', [ProductController::class, 'cart'])->name('product.cart');
+Route::get('/', [ProductController::class, 'index']);
+Route::get('/cart', [ProductController::class, 'cart'])->name('product.cart');
 
-    Route::get('/create', [ProductController::class, 'create'])->name('product.create');
-    Route::post('/store', [ProductController::class, 'store'])->name('product.store');
+Route::get('/create', [ProductController::class, 'create'])->name('product.create');
+Route::post('/store', [ProductController::class, 'store'])->name('product.store');
 
-    Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
-    Route::post('/update/{id}', [ProductController::class, 'update'])->name('product.update');
+Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
+Route::post('/update/{id}', [ProductController::class, 'update'])->name('product.update');
 
-    Route::post('/delete/{id}', [ProductController::class, 'destroy'])->name('product.delete');
+Route::post('/delete/{id}', [ProductController::class, 'destroy'])->name('product.delete');
 // });
 
 
@@ -71,3 +72,14 @@ Route::prefix('/message')->group(function () {
 
 Route::middleware('auth')->get('/userinfo', [FrontController::class, 'user_info'])->name('userinfo');
 Route::middleware('auth')->post('/userinfo/update', [FrontController::class, 'user_info_update'])->name('userinfo.update');
+
+Route::prefix('/checkout')->group(function () {
+    Route::get('/', [CheckOutController::class, 'index'])->name('checkout.index');
+    Route::post('/create', [CheckOutController::class, 'create'])->name('checkout.create');
+    Route::post('/store', [CheckOutController::class, 'store'])->name('checkout.store');
+
+    Route::get('/edit/{id}', [CheckOutController::class, 'edit'])->name('checkout.edit');
+    Route::post('/update/{id}', [CheckOutController::class, 'update'])->name('checkout.update');
+
+    Route::delete('/delete/{id}', [CheckOutController::class, 'destroy'])->name('checkout.delete');
+});

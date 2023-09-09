@@ -45,7 +45,6 @@
 
 <body>
     <div class="">
-
         <head class="head d-flex">
             <div class="head-top py-1 bg-light">
                 <div class="container mx-auto d-flex justify-content-center justify-content-lg-between">

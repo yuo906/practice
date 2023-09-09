@@ -20,6 +20,10 @@
             <div class="d-flex mt-3">
                 <button type="button" class="btn btn-success column-gap-3" onclick="editmode()">編輯</button>
             </div>
+
+            @if ($errors->first())
+                <input id="error" type="hidden" value="{{ $errors->first() }}">
+            @endif
         </form>
     </main>
     {{$errors->first()}}
@@ -38,14 +42,25 @@
         }
     </script>
 
-    @if ($errors->first())
+    {{-- 錯誤框寫法一 --}}
+    {{-- @if ($errors->first())
         <script>
             Swal.fire({
                 icon: 'error',
                 title: '{{ $errors->first() }}',
             })
         </script>
-    @endif
+    @endif --}}
+
+    {{-- 錯誤框寫法二 --}}
+        <script>
+            const error = document.querySelector('input#error');
+            Swal.fire({
+                icon: 'error',
+                title: error.value,
+            })
+        </script>
+
     {{-- @error('nameError')
     @enderror --}}
 @endsection
