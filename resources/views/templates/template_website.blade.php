@@ -45,6 +45,7 @@
 
 <body>
     <div class="">
+
         <head class="head d-flex">
             <div class="head-top py-1 bg-light">
                 <div class="container mx-auto d-flex justify-content-center justify-content-lg-between">
@@ -131,7 +132,8 @@
                                                         href=""><span>Colorado</span><span>Min:$80</span></a>
                                                 </li>
                                                 <li><a class="d-flex justify-content-between text-black p-3"
-                                                        href=""><span>Florida</span><span>Min:$90</span></a></li>
+                                                        href=""><span>Florida</span><span>Min:$90</span></a>
+                                                </li>
                                                 <li><a class="d-flex justify-content-between text-black p-3"
                                                         href=""><span>Arizona</span><span>Min:$50</span></a>
                                                 </li>
@@ -152,6 +154,15 @@
                         </div>
                     </div>
                     <div class="d-flex align-items-center">
+
+                        @auth
+                        <div class="me-3">
+                            Hi,{{ Auth::user()->name }}
+                        </div>
+                        @endauth
+
+
+
                         <a href="{{ route('product.cart') }}">
                             <i class="fa-light fa-heart me-3 position-relative d-none d-lg-block"
                                 style="color: #87939a;">

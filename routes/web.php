@@ -75,6 +75,11 @@ Route::middleware('auth')->post('/userinfo/update', [FrontController::class, 'us
 
 Route::prefix('/checkout')->group(function () {
     Route::get('/', [CheckOutController::class, 'index'])->name('checkout.index');
+    Route::get('/delivery_detail', [CheckOutController::class, 'delivery_detail'])->name('checkout.delivery_detail');
+    Route::get('/payment_detail', [CheckOutController::class, 'payment_detail'])->name('checkout.payment_detail');
+    Route::get('/order_complete', [CheckOutController::class, 'order_complete'])->name('checkout.order_complete');
+
+
     Route::post('/create', [CheckOutController::class, 'create'])->name('checkout.create');
     Route::post('/store', [CheckOutController::class, 'store'])->name('checkout.store');
 

@@ -14,6 +14,21 @@ class CheckOutController extends Controller
         return view('checkout.checkout_order_detail');
     }
 
+    public function delivery_detail()
+    {
+        return view('checkout.delivery_detail');
+    }
+
+    public function payment_detail()
+    {
+        return view('checkout.payment_detail');
+    }
+
+    public function order_complete()
+    {
+        return view('checkout.order_complete');
+    }
+
     /**
      * Show the form for creating a new resource.
      */

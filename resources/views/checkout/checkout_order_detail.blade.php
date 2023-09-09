@@ -12,7 +12,7 @@
         <div class="title py-4 mb-4 px-2 w-100">
             <h2 class="fw-medium w-50 bold">Checkout</h2>
             <div class="text-muted">Already have an account? Click here to
-                <a href="" class="text-success">Sign in</a>.
+                <a href="{{ route('login') }}" class="text-success">Sign in</a>.
             </div>
         </div>
 
@@ -53,8 +53,11 @@
             </div>
         </div>
 
+        {{-- 按鈕 --}}
         <div class="d-flex justify-content-end py-3">
-            <button class="btn btn-success">Next</button>
+            <a href="{{ route('checkout.delivery_detail') }}">
+                <button type="button" class="btn btn-success">Next</button>
+            </a>
         </div>
     </main>
 @endsection
