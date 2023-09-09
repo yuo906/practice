@@ -17,41 +17,45 @@
         </div>
 
         {{-- 商品列表 --}}
-        <div>
-            <div class="order-details-head border rounded-top">
-                <div class="p-3">Order Details</div>
-            </div>
-            <div class="order-details-body">
-                <div class="p-3 d-flex justify-content-between align-items-center border">
-                    <div class="d-flex align-items-center">
-                        <div>
-                            <img style="width:150px;" src="{{ asset('image/product-img-1.jpg') }}" alt="">
-                        </div>
-                        <div>
-                            <div class="product-name">Cadbury 5 Star Chocolate</div>
-                            <div class="product-desc text-muted">1kg</div>
-                        </div>
-                    </div>
-                    <div>$15.00</div>
+        <form action="" method="POST">
+            @csrf
+            <div>
+                <div class="order-details-head border rounded-top">
+                    <div class="p-3">Order Details</div>
                 </div>
-                <div class="p-3 d-flex justify-content-between align-items-center border">
-                    <div class="d-flex align-items-center">
-                        <div>
-                            <img style="width:150px;" src="{{ asset('image/product-img-2.jpg') }}" alt="">
+                <div class="order-details-body">
+                    <div class="p-3 d-flex justify-content-between align-items-center border">
+                        <div class="d-flex align-items-center">
+                            <div>
+                                <img style="width:150px;" src="{{ asset('image/product-img-1.jpg') }}" alt="">
+                            </div>
+                            <div>
+                                <div class="product-name">Cadbury 5 Star Chocolate</div>
+                                <div class="product-desc text-muted">1kg</div>
+                            </div>
                         </div>
-                        <div>
-                            <div class="product-name">Cadbury 5 Star Chocolate</div>
-                            <div class="product-desc text-muted">1kg</div>
-                        </div>
+                        <div>$15.00</div>
                     </div>
-                    <div>$15.00</div>
+                    <div class="p-3 d-flex justify-content-between align-items-center border">
+                        <div class="d-flex align-items-center">
+                            <div>
+                                <img style="width:150px;" src="{{ asset('image/product-img-2.jpg') }}" alt="">
+                            </div>
+                            <div>
+                                <div class="product-name">Cadbury 5 Star Chocolate</div>
+                                <div class="product-desc text-muted">1kg</div>
+                            </div>
+                        </div>
+                        <div>$15.00</div>
+                    </div>
+                </div>
+                <div
+                    class="order-details-footer d-flex justify-content-between align-items-center p-3 border rounded-bottom">
+                    <div>Subtotal</div>
+                    <div>$30.00</div>
                 </div>
             </div>
-            <div class="order-details-footer d-flex justify-content-between align-items-center p-3 border rounded-bottom">
-                <div>Subtotal</div>
-                <div>$30.00</div>
-            </div>
-        </div>
+        </form>
 
         {{-- 按鈕 --}}
         <div class="d-flex justify-content-end py-3">

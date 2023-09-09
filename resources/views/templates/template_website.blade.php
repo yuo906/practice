@@ -156,12 +156,24 @@
                     <div class="d-flex align-items-center">
 
                         @auth
-                        <div class="me-3">
-                            Hi,{{ Auth::user()->name }}
-                        </div>
+                            <div class="me-3">
+                                Hi,{{ Auth::user()->name }}
+                            </div>
+                            <div class="me-3">
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-outline-success">登出</button>
+                                </form>
+                            </div>
                         @endauth
 
-
+                        @guest
+                            <div class="me-3">
+                                <a href="{{ route('login') }}" class="text-muted">
+                                    Hi, 訪客,點此登入
+                                </a>
+                            </div>
+                        @endguest
 
                         <a href="{{ route('product.cart') }}">
                             <i class="fa-light fa-heart me-3 position-relative d-none d-lg-block"

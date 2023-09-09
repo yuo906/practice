@@ -9,9 +9,19 @@ class CheckOutController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+
+
         return view('checkout.checkout_order_detail');
+
+    }
+
+    public function index_store(Request $request)
+    {
+        $request->validate([
+            
+        ])
     }
 
     public function delivery_detail()
@@ -40,10 +50,7 @@ class CheckOutController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        //
-    }
+
 
     /**
      * Display the specified resource.

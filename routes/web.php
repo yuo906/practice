@@ -88,3 +88,8 @@ Route::prefix('/checkout')->group(function () {
 
     Route::delete('/delete/{id}', [CheckOutController::class, 'destroy'])->name('checkout.delete');
 });
+
+
+Route::get('/playground', [FrontController::class, 'test'])->name('test.step1');
+Route::post('/playground-step1/store', [FrontController::class, 'test1_store'])->name('test.step1Store');
+Route::get('/playground-step2', [FrontController::class, 'test2'])->name('test.step2');
