@@ -49,9 +49,11 @@
     <div class="container">
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4">
             @foreach ($products ?? [] as $item)
-                <div class="col">
-                    <div class="card">
-                        <img src="{{ asset($item->img_path) }}" class="card-img-top" alt="...">
+                <div class="col mb-3">
+                    <div class="card h-100">
+                        <div class="h-50 m-auto">
+                            <img src="{{ asset($item->img_path) }}" class="card-img-top" alt="..." style="width: 150px">
+                        </div>
                         <div class="card-body">
                             <h5 class="card-title">{{ $item->name }}</h5>
                             <p class="card-text">{{ $item->desc }}</p>
@@ -67,8 +69,13 @@
                                     <button type="button" class="controlBtn plusBtn"
                                         onclick="plus({{ $item->id }})">+</button>
                                 </div>
-                                <button type="button" class="btn btn-success"
-                                    onclick="addCart({{ $item->id }})">加入購物車</button>
+
+                                @if (Auth::check())
+                                    <button type="button" class="btn btn-success"
+                                        onclick="addCart({{ $item->id }})">加入購物車</button>
+                                @else
+                                    <a href="{{route('login')}}" class="btn btn-success">加入購物車</a>
+                                @endif
                             </div>
                             {{-- </form> --}}
                         </div>

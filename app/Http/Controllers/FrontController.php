@@ -125,7 +125,6 @@ class FrontController extends Controller
 
 
 
-
     public function test(Request $request)
     {
         //取得session中key的資料(參數1=>自行設定的key,參數2=>假設沒有找到則使用預設資料)

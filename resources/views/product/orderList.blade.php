@@ -73,7 +73,6 @@
                                             @else
                                                 <span class="badge fw-bolder bg-danger">不顯示</span>
                                             @endif
-
                                         </th>
                                         <th>{{ $item->price }}</th>
                                         <th>

@@ -20,7 +20,7 @@
                             </div>
                             <div class="d-flex gap-5">
                                 <span class="bg-primary-subtle px-3 py-2">產品圖片*</span>
-                                <img src="{{ asset($product->img_path) }}" alt="" class="w-15">
+                                <img src="{{ asset($product->img_path) }}" alt="" style="width: 80px">
                                 <input name="image" type="file" accept="image/*">
                             </div>
                             <div class="d-flex gap-5">

@@ -191,18 +191,21 @@
                             </a>
                         </button>
 
-                        <button class="border-0 bg-white" type="button" data-bs-toggle="offcanvas"
-                            data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
-                            <i class="fa-sharp fa-light fa-bag-shopping position-relative" style="color: #859198;">
-                                <span
+                        {{-- <button type="button" class="border-0 bg-white" data-bs-toggle="offcanvas"
+                            data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"> --}}
+                            <a href="{{ route('user.check') }}">
+                                <i class="fa-sharp fa-light fa-bag-shopping position-relative"
+                                    style="color: #859198;">
+                                    {{-- <span
                                     class="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-success">
                                     1
-                                </span>
-                            </i>
-                        </button>
+                                </span> --}}
+                                </i>
+                            </a>
+                        {{-- </button> --}}
 
                         {{-- Shop Cart --}}
-                        <div class="offcanvas offcanvas-end offcanvas-right" tabindex="-1" id="offcanvasRight"
+                        {{-- <div class="offcanvas offcanvas-end offcanvas-right" tabindex="-1" id="offcanvasRight"
                             aria-labelledby="offcanvasRightLabel">
 
 
@@ -360,7 +363,7 @@
                                     <button type="button" class="btn btn-dark">Update Cart</button>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
 
                         <button class="btn d-lg-none" type="button" data-bs-toggle="offcanvas"
                             data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">

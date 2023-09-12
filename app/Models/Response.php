@@ -10,7 +10,7 @@ class Response extends Model
 
     protected $fillable = ['response', 'message_id'];
 
-    public function response(){
-        return $this->hasOne(Response::class,'id','message_id');
+    public function message(){
+        return $this->hasOne(Message::class,'id','message_id');
     }
 }

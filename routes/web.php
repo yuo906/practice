@@ -88,10 +88,23 @@ Route::middleware('auth')->group(function () {
         Route::post('/update/{id}', [CheckOutController::class, 'update'])->name('checkout.update');
 
         Route::delete('/delete/{id}', [CheckOutController::class, 'destroy'])->name('checkout.delete');
+
     });
 
     Route::prefix('/products')->group(function () {
         Route::post('/add-carts', [FrontController::class, 'addcart'])->name('front.addCart');
+    });
+
+
+
+    // 作業
+    Route::prefix('/CheckOut')->group(function () {
+        Route::get('/user_check', [CheckOutController::class, 'check'])->name('user.check');
+        Route::put('/user_checkqty', [CheckOutController::class, 'changeQty'])->name('user.checkqty');
+
+        Route::get('/user_del_info', [CheckOutController::class, 'del_info'])->name('user.del');
+        Route::get('/user_pay_info', [CheckOutController::class, 'pay_info'])->name('user.pay');
+        Route::get('/user_thx', [CheckOutController::class, 'thx'])->name('user.thx');
     });
 });
 
@@ -110,7 +123,6 @@ Route::middleware('auth', 'role.weight: 12')->group(function () {
         Route::delete('/delete/{id}', [MessageController::class, 'destroy'])->name('message.delete');
         Route::delete('/deleteResponse/{id}', [MessageController::class, 'destroyResponse'])->name('message.deleteResponse');
     });
-
 });
 
 
