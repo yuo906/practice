@@ -41,6 +41,7 @@
             margin-left: 4px;
         }
     </style>
+    @yield('head')
 </head>
 
 <body>
@@ -642,6 +643,13 @@
 
                     {{-- navbar-nav --}}
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item dropdown dropbtn me-1">
+                            <a class="nav-link" href="{{ route('front.products') }}">
+                                Product
+                            </a>
+                        </li>
+
+
                         <li class="nav-item dropdown dropbtn me-1">
                             <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">

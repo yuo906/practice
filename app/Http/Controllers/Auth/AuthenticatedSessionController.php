@@ -28,7 +28,11 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
         //                  生成金鑰可以維持登入
         $request->session()->regenerate();
-        // 
+        //
+        $userRole = $request->user()?->user_role ?? 0;
+        if ($userRole === 1) {
+            return redirect()->intended(RouteServiceProvider::ADMIN);
+        }
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 

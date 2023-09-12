@@ -21,22 +21,52 @@
                 <div id="menuL-logo"></div>
             </a>
         </div>
-        <div class="side-nav w-100 px-3">
-            <button class=" text-start px-3 py-3 w-100" type="button"><i class="bi bi-house"></i><span
-                    class="ms-3">Dashboards</span></button>
+        <ul class="side-nav w-100 px-3">
+            <li class="nav-item">
+                <a @if (Route::currentRouteName() == 'backend.index') class="nav-link active"
+                @else
+                class="nav-link" @endif
+                    class="nav-link" href="{{ route('backend.index') }}">
+                    <div class=" text-start px-3 py-3 w-100">
+                        <i class="bi bi-house"></i>
+                        <span class="ms-3">Dashboards</span>
+                    </div>
+                </a>
+            </li>
 
 
             <div class=" text-start px-3 py-xl-3 menuL-title"><span>Store Managements</span></div>
-            <button class=" text-start px-3 py-3 w-100" type="button"><i class="bi bi-cart"></i><span
-                    class="ms-3">Products</span></button>
-            <button class=" text-start px-3 py-3 w-100" type="button"><i class="bi bi-list-task"></i><span
-                    class="ms-3">Categories</span></button>
+
+            <li>
+                <a @if (Route::currentRouteName() == 'product.cart') class="nav-link active"
+                @else
+                class="nav-link" @endif
+                    class="nav-link" href="{{ route('product.cart') }}">
+                    <div class=" text-start px-3 py-3 w-100" type="button">
+                        <i class="bi bi-cart"></i>
+                        <span class="ms-3">Products</span>
+                    </div>
+                </a>
+            </li>
+
+            <li>
+                <a @if (Route::currentRouteName() == 'type.index') class="nav-link active"
+            @else
+            class="nav-link" @endif
+                    class="nav-link" href="{{ route('type.index') }}">
+                    <div class=" text-start px-3 py-3 w-100" type="button">
+                        <i class="bi bi-list-task"></i>
+                        <span class="ms-3">Type</span>
+                    </div>
+                </a>
+            </li>
+
 
             <button class=" text-start px-3 py-3 w-100 orders" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarToggleExternalContent5" aria-controls="navbarToggleExternalContent5"
                 aria-expanded="false" aria-label="Toggle navigation"><i class="bi bi-bag"></i><span
-                    class="ms-3">Orders</span><span class="float-end"><img class="chevron-down" src="./img/下載.svg"
-                        width="14" height="22.39" alt=""></span></button>
+                    class="ms-3">Orders</span><span class="float-end"><img class="chevron-down"
+                        src="{{ asset('img/下載.svg') }}" width="14" height="22.39" alt=""></span></button>
             <div class="collapse" id="navbarToggleExternalContent5">
                 <div class="option-list ps-0 position-relative">
                     <button class=" text-start ps-4 py-2 w-100 position-relative" type="button"><span class="ms-4">
@@ -48,135 +78,35 @@
                 </div>
             </div>
 
-            <button class=" text-start px-3 py-3 w-100" type="button"><i class="bi bi-shop"></i><span
-                    class="ms-3">Sellers / Vendors</span></button>
 
-            <button class=" text-start px-3 py-3 w-100" type="button"><i class="bi bi-people"></i><span
-                    class="ms-3">Customers</span></button>
-
-            <button class=" text-start px-3 py-3 w-100" type="button"><i class="bi bi-star"></i><span
-                    class="ms-3">Reviews</span></button>
-
-            <button class=" text-start px-3 py-3 w-100" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarToggleExternalContent20" aria-controls="navbarToggleExternalContent20"
-                aria-expanded="false" aria-label="Toggle navigation" id="MenuLevel"><i
-                    class=" bi bi-arrow-90deg-down"></i><span class="ms-3">Menu Level</span><span
-                    class="float-end"><img class="chevron-down-1" src="./img/下載.svg" width="14" height="22.39"
-                        alt=""></span></button>
-            <div class="collapse" id="navbarToggleExternalContent20">
-                <div class="option-list ps-0">
-                    <button class=" text-start pe-3 ps-4 py-2 w-100 position-relative" type="button"
-                        data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent21"
-                        aria-controls="navbarToggleExternalContent21" aria-expanded="false"
-                        aria-label="Toggle navigation" id="twoLevel"><span class="ms-4">
-                            <div class="dot"></div>Two Level
-                        </span><span class="float-end"><img class="chevron-down-2" src="./img/下載.svg" width="14"
-                                height="22.39" alt=""></span></button>
-                    <div class="collapse" id="navbarToggleExternalContent21">
-                        <div class="option-list ps-0">
-                            <button class=" text-start pe-3 ps-4 py-2 w-100 position-relative"><span class="ms-4">
-                                    <div class="dot"></div>NavItem
-                                    1
-                                </span></button>
-                            <button class=" text-start pe-3 ps-4 py-2 w-100 position-relative"><span class="ms-4">
-                                    <div class="dot"></div>NavItem
-                                    2
-                                </span></button>
-                        </div>
-                    </div>
-                    <button class=" text-start pe-3 ps-4 py-2 w-100 position-relative" type="button"
-                        data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent22"
-                        aria-controls="navbarToggleExternalContent22" aria-expanded="false"
-                        aria-label="Toggle navigation" id="threeLevel"><span class="ms-4">
-                            <div class="dot"></div>Three Level
-                        </span><span class="float-end"><img class="chevron-down-3" src="./img/下載.svg" width="14"
-                                height="22.39" alt=""></span></button>
-                    <div class="collapse" id="navbarToggleExternalContent22">
-                        <div class="option-list ps-0">
-                            <button class=" text-start ps-4 pe-3 py-2 w-100 position-relative" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent23"
-                                aria-controls="navbarToggleExternalContent23" aria-expanded="false"
-                                aria-label="Toggle navigation" id="navItem"><span class="ms-4">
-                                    <div class="dot"></div>NavItem 1
-                                </span><span class="float-end"><img class="chevron-down-4" src="./img/下載.svg"
-                                        width="14" height="22.39" alt=""></span></button>
-                            <div class="collapse" id="navbarToggleExternalContent23">
-                                <div class="option-list ps-4">
-                                    <button class=" text-start pe-3 ps-4 py-2 w-100 position-relative"><span
-                                            class="ms-3">
-                                            <div class="dot"></div>NavChild Item 1
-                                        </span></button>
-                                    <!-- <div class="pe-3 py-2">NavItem 2</div> -->
-                                </div>
-                            </div>
-                            <button class=" text-start px-4 py-2 w-100 position-relative"><span class="ms-4">
-                                    <div class="dot"></div>Nav Item 2
-                                </span></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             <div class=" text-start px-3 py-xl-3 menuL-title"><span>Site Settings</span><span
                     class="badge bg-primary-subtle text-primary-emphasis ms-4">Coming Soon</span></div>
 
-            <div class=" text-start px-3 py-3 text-body-tertiary"><i class="bi bi-newspaper"></i><span
-                    class="ms-3">Blog</span></div>
 
-            <div class=" text-start px-3 py-3 text-body-tertiary"><i class="bi bi-images"></i><span
-                    class="ms-3">Media</span></div>
-
-            <div class=" text-start px-3 py-3 text-body-tertiary"><i class="bi bi-gear"></i><span
-                    class="ms-3">Store
+            <div class=" text-start px-3 py-3 text-body-tertiary"><i class="bi bi-gear"></i><span class="ms-3">Store
                     Settings</span></div>
-
-            <div class=" text-start px-3 py-xl-3 menuL-title"><span>Support</span><span
-                    class="badge bg-primary-subtle text-primary-emphasis ms-4">Coming Soon</span></div>
-
-            <div class=" text-start px-3 py-3 text-body-tertiary"><i class="bi bi-headphones"></i><span
-                    class="ms-3">Support Ticket
-                </span></div>
-
-            <div class=" text-start px-3 py-3 text-body-tertiary"><i class="bi bi-question-circle"></i><span
-                    class="ms-3">Help Center
-                </span></div>
-
-            <div class=" text-start px-3 py-3 text-body-tertiary"><i class="bi bi-infinity"></i><span
-                    class="ms-3">How
-                    FreshCart
-                    Works</span></div>
-
-            <div class=" text-start px-3 py-xl-3 menuL-title"><span>Our Apps</span></div>
-
-
-            <div class=" text-start px-3 py-3 text-body-tertiary"><i class="bi bi-apple"></i><span
-                    class="ms-3">Apple
-                    Store</span></div>
-
-
-            <div class=" text-start px-3 py-3 mb-4 text-body-tertiary"><i class="bi bi-google-play"></i><span
-                    class="ms-3">Google Play Store</span></div>
-        </div>
+        </ul>
     </div>
+
     <div class="p-0 position-relative " id="mainPage">
-        <nav class="navbar navbar-light p-0 sticky-top d-flex  align-items-center">
+        <nav class="navbar navbar-light p-0 sticky-top d-flex align-items-center">
             <div class="container-fluid align-items-center">
                 <div class="navL d-flex w-50">
                     <button class="navbar-toggler d-xl-none p-0 border-0  burger" type="button"
                         data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-                        <span class="ps-4 pe-2"><svg xmlns="http://www.w3.org/2000/svg" width="32"
-                                height="32" fill="currentColor" class="bi bi-text-indent-right"
-                                viewBox="0 0 16 16">
+                        <span class="ps-4 pe-2"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                                fill="currentColor" class="bi bi-text-indent-right" viewBox="0 0 16 16">
                                 <path
                                     d="M2 3.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm10.646 2.146a.5.5 0 0 1 .708.708L11.707 8l1.647 1.646a.5.5 0 0 1-.708.708l-2-2a.5.5 0 0 1 0-.708l2-2zM2 6.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z">
                                 </path>
                             </svg></span>
                     </button>
                     <form class="d-flex position-relative ms-2">
-                        <!-- <span class="mdi mdi-magnify search-icon"></span> -->
-                        <input class="form-control rounded-0 w-100" id="search-area" type="search"
-                            placeholder="Search" aria-label="Search">
-                        <!-- <button class="btn rounded-0" type="submit" id="search">Search</button> -->
+
+                        <input class="form-control rounded-0 w-100" id="search-area" type="search" placeholder="Search"
+                            aria-label="Search">
+
                     </form>
                 </div>
                 <div class="cotainer d-flex justify-content-between align-items-center">
@@ -278,6 +208,9 @@
                         </ul>
                     </div>
                 </div>
+
+
+
                 <div class="offcanvas offcanvas-start w-25 p-0" tabindex="-1" id="offcanvasNavbar"
                     aria-labelledby="offcanvasNavbarLabel">
                     <div
@@ -295,7 +228,7 @@
                         <button class=" text-start px-3 py-3 w-100" type="button"><i class="bi bi-cart"></i><span
                                 class="ms-3">Products</span></button>
                         <button class=" text-start px-3 py-3 w-100" type="button"><i
-                                class="bi bi-list-task"></i><span class="ms-3">Categories</span></button>
+                                class="bi bi-list-task"></i><span class="ms-3">Type</span></button>
 
                         <button class=" text-start px-3 py-3 w-100 orders-2" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarToggleExternalContent5"
@@ -315,55 +248,17 @@
                             </div>
                         </div>
 
-                        <button class=" text-start px-3 py-3 w-100" type="button"><i class="bi bi-shop"></i><span
-                                class="ms-3">Sellers / Vendors</span></button>
 
-                        <button class=" text-start px-3 py-3 w-100" type="button"><i class="bi bi-people"></i><span
-                                class="ms-3">Customers</span></button>
-
-                        <button class=" text-start px-3 py-3 w-100" type="button"><i class="bi bi-star"></i><span
-                                class="ms-3">Reviews</span></button>
 
 
                         <div class=" text-start px-3 py-3 menuL-title"><span>Site Settings</span><span
                                 class="badge bg-primary-subtle text-primary-emphasis ms-4">Coming Soon</span></div>
 
-                        <div class=" text-start px-3 py-3 text-body-tertiary"><i class="bi bi-newspaper"></i><span
-                                class="ms-3">Blog</span></div>
+                        <div class=" text-start px-3 py-3 text-body-tertiary">
+                            <i class="bi bi-gear"></i>
+                            <span class="ms-3">Store Settings</span>
+                        </div>
 
-                        <div class=" text-start px-3 py-3 text-body-tertiary"><i class="bi bi-images"></i><span
-                                class="ms-3">Media</span></div>
-
-                        <div class=" text-start px-3 py-3 text-body-tertiary"><i class="bi bi-gear"></i><span
-                                class="ms-3">Store
-                                Settings</span></div>
-
-                        <div class=" text-start px-3 py-3 menuL-title"><span>Support</span><span
-                                class="badge bg-primary-subtle text-primary-emphasis ms-4">Coming Soon</span></div>
-
-                        <div class=" text-start px-3 py-3 text-body-tertiary"><i class="bi bi-headphones"></i><span
-                                class="ms-3">Support Ticket
-                            </span></div>
-
-                        <div class=" text-start px-3 py-3 text-body-tertiary"><i
-                                class="bi bi-question-circle"></i><span class="ms-3">Help Center
-                            </span></div>
-
-                        <div class=" text-start px-3 py-3 text-body-tertiary"><i class="bi bi-infinity"></i><span
-                                class="ms-3">How
-                                FreshCart
-                                Works</span></div>
-
-                        <div class=" text-start px-3 py-3 menuL-title"><span>Our Apps</span></div>
-
-
-                        <div class=" text-start px-3 py-3 text-body-tertiary"><i class="bi bi-apple"></i><span
-                                class="ms-3">Apple
-                                Store</span></div>
-
-
-                        <div class=" text-start px-3 py-3 mb-4 text-body-tertiary"><i
-                                class="bi bi-google-play"></i><span class="ms-3">Google Play Store</span></div>
                     </div>
                 </div>
             </div>
@@ -373,7 +268,7 @@
     <script src="{{ asset('js/bootstrap.bundle.js') }}"></script>
     <script src="{{ asset('js/js.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        @yield('js')
+    @yield('js')
 </body>
 
 </html>

@@ -20,8 +20,8 @@ class CheckOutController extends Controller
     public function index_store(Request $request)
     {
         $request->validate([
-            
-        ])
+
+        ]);
     }
 
     public function delivery_detail()

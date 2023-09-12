@@ -25,11 +25,6 @@ class ProductController extends Controller
     {
     }
 
-    public function index()
-    {
-        return view('product.website');
-    }
-
     public function cart(Request $request)
     {
         // get()完不能再寫 where 所以改query

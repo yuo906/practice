@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Models\Product;
+use App\Models\Product;
+use App\Models\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
@@ -75,15 +76,64 @@ class FrontController extends Controller
     }
 
 
+    public function product()
+    {
+        $products = Product::where('status', 1)->get();
+        return view('frontProduct', compact('products'));
+    }
+
+    public function addcart(Request $request)
+    {
+
+        $request->validate([
+            'qty' => 'required|min:1|numeric',
+            'product_id' => 'required|exists:product_practices,id|numeric',
+        ]);
+
+        // 寫法一
+        $oddCart = Cart::where('user_id', $request->user()->id)->where('product_id', $request->product_id)->first();
+        if($oddCart){
+            $cart = $oddCart->update([
+                'qty'=>$oddCart->qty+ $request->qty,
+            ]);
+        }else {
+            $cart = Cart::create([
+                'product_id' => $request->product_id,
+                'qty' => $request->qty,
+                'user_id' => $request->user()->id,
+            ]);
+        }
+
+        // 寫法二
+        // $oddCart = Cart::updateOrCreate([
+        //     'user_id' => $request->user()->id,
+        //     'product_id' => $request->product_id,
+        // ],[
+        //     'qty'=>123,
+        // ]);
+
+        // dd('123');
+        return (object)[
+            'code' => $oddCart ? 1 : 0,
+            'product_id' =>$request->product_id,
+        ];
+    }
+
+
+
+
+
+
+
+
     public function test(Request $request)
     {
         //取得session中key的資料(參數1=>自行設定的key,參數2=>假設沒有找到則使用預設資料)
         // $hasBeen = $request->session()->get('mytest','沒有去過step2');
         // 清除session中key的資料
         // $request->session()->forget('mytest');
-        $phone = $request->session()->get('form_phone','');
+        $phone = $request->session()->get('form_phone', '');
         return view('test', compact('phone'));
-
     }
 
     public function test1_store(Request $request)
@@ -92,17 +142,14 @@ class FrontController extends Controller
             'phone' => 'required',
         ]);
 
-         // 設置session中key的資料      key          value
+        // 設置session中key的資料      key          value
         $request->session()->put('form_phone', $request->phone);
         return redirect(route('test.step2'));
-
     }
 
     public function test2(Request $request)
     {
-        $phone = $request->session()->get('form_phone','');
-        return view('test2',compact('phone'));
-
+        $phone = $request->session()->get('form_phone', '');
+        return view('test2', compact('phone'));
     }
-
 }
