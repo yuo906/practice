@@ -61,28 +61,22 @@
         {{-- , ['id' => $item->id] --}}
         <ul class="list-group">
             <li class="list-group-item">Order Details</li>
-            {{-- @foreach ($item->product ?? [] as $checkout) --}}
-
-            {{-- @dd($item->product) --}}
             @foreach ($carts ?? [] as $item)
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <span><img src="{{ asset($item->product->img_path) }}" alt="" width="150"></span>
-                    <span>{{ $item->product->name }}
+                    <div>{{ $item->product->name }}
                         <p>{{ $item->product->desc }}</p>
                         <p>{{ $item->product->price }}</p>
-                    </span>
+                    </div>
                     <div class="btns d-flex">
                         <button type="button" class="controlBtn minusBtn" onclick="minus({{ $item->id }})">-</button>
                         <input name="qty{{ $item->id }}" id="product{{ $item->id }}" type="number"
-                            value="{{ $item->qty }}" onchange="checkQty(this)">
+                            value="{{ $item->qty }}" onchange="checkQty('{{ $item->id }}')">
                         <button type="button" class="controlBtn plusBtn" onclick="plus({{ $item->id }})">+</button>
                     </div>
-
                     <span id="price{{ $item->id }}">${{ $item->product->price * $item->qty }}</span>
-
                 </li>
             @endforeach
-            {{-- @endforeach --}}
             <li class="list-group-item d-flex justify-content-between">
                 <span>Subtotal</span>
                 <span id="total">${{ $total }}</span>
@@ -116,12 +110,12 @@
             fetchQty(id, input.value);
         }
 
-        function checkQty(el) {
-            console.log(el);
-            if (el.value <= 0) {
-                // console.log(el);
-                el.value = 1;
+        function checkQty(id) {
+            const input = document.querySelector(`input#product${id}`);
+            if (input.value <= 0) {
+                input.value = 1;
             }
+            fetchQty(id, input.value);
         }
 
         function fetchQty(id, qty) {
@@ -138,11 +132,26 @@
             }).then((res) => {
                 return res.json();
             }).then((data) => {
-                const price = document.querySelector(`#price${id}`);
-                // const total =document.querySelector('#total');
-                price.textContent = '$' + `${data.price}`;
+                if (data.code == 1) {
 
-                // const all_price =document.querySelectorAll('li ')
+                    const price = document.querySelector(`#price${id}`);
+                    price.textContent = '$' + `${data.price}`;
+
+                    const totalEl = document.querySelector('#total');
+                    const all_price = document.querySelectorAll('[id^=price]');
+                    // console.log(all_price);
+                    let total = 0;
+                    all_price.forEach(element => {
+                        const price = parseInt(element.textContent.substring(1));
+                        // console.log(price);
+                        total += price;
+                    });
+
+                    totalEl.textContent = '$' + total;
+
+                } else {
+                    location.reload();
+                }
             });
 
         }

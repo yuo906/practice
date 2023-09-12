@@ -103,7 +103,9 @@ Route::middleware('auth')->group(function () {
         Route::put('/user_checkqty', [CheckOutController::class, 'changeQty'])->name('user.checkqty');
 
         Route::get('/user_del_info', [CheckOutController::class, 'del_info'])->name('user.del');
+        Route::post('/user_del_info_store', [CheckOutController::class, 'del_info_store'])->name('user.del_store');
         Route::get('/user_pay_info', [CheckOutController::class, 'pay_info'])->name('user.pay');
+        Route::post('/user_pay_info_store', [CheckOutController::class, 'pay_info_store'])->name('user.pay_store');
         Route::get('/user_thx', [CheckOutController::class, 'thx'])->name('user.thx');
     });
 });

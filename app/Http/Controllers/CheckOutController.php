@@ -116,20 +116,57 @@ class CheckOutController extends Controller
 
     public function del_info(Request $request)
     {
-        //
-        return view('/checkout/del-info');
+        $name = $request->session()->get('form_name', '');
+        $add = $request->session()->get('form_add', '');
+        $date = $request->session()->get('form_date', '');
+        $tel = $request->session()->get('form_tel', '');
+        $ps = $request->session()->get('form_ps', '');
+
+        return view('checkout.del-info', compact('name', 'add', 'date', 'tel', 'ps'));
     }
+
+
+    public function del_info_store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'add' => 'required',
+            'date' => 'required',
+            'tel' => 'required|numeric',
+            // 'ps' => 'required',
+        ]);
+        // dd($request);
+
+        // 設置session中key的資料      key          value
+        $request->session()->put('form_name', $request->name);
+        $request->session()->put('form_add', $request->add);
+        $request->session()->put('form_date', $request->date);
+        $request->session()->put('form_tel', $request->tel);
+        $request->session()->put('form_ps', $request->ps);
+        // dd($request);
+
+        return redirect(route('user.pay'));
+    }
+
+
 
     public function pay_info(Request $request)
     {
+        // $pay = $request->session()->get('form_pay', '');
+        // dd($pay);
+        return view('checkout.pay-info');
+    }
+
+    public function pay_info_store(Request $request)
+    {
         //
-        return view('/checkout/pay-info');
+        return redirect(route('user.thx'));
     }
 
     public function thx(Request $request)
     {
         //
-        return view('/checkout/thanks');
+        return view('checkout.thanks');
     }
 
 
