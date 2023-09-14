@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Cart;
 use Illuminate\Http\Request;
+use App\Models\OrderList;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 
@@ -92,11 +93,11 @@ class FrontController extends Controller
 
         // 寫法一
         $oddCart = Cart::where('user_id', $request->user()->id)->where('product_id', $request->product_id)->first();
-        if($oddCart){
+        if ($oddCart) {
             $cart = $oddCart->update([
-                'qty'=>$oddCart->qty+ $request->qty,
+                'qty' => $oddCart->qty + $request->qty,
             ]);
-        }else {
+        } else {
             $cart = Cart::create([
                 'product_id' => $request->product_id,
                 'qty' => $request->qty,
@@ -115,8 +116,79 @@ class FrontController extends Controller
         // dd('123');
         return (object)[
             'code' => $oddCart ? 1 : 0,
-            'product_id' =>$request->product_id,
+            'product_id' => $request->product_id,
         ];
+    }
+
+    public function order_list(Request $request)
+    {
+        $user = $request->user();
+        $orders = OrderList::where('user_id', $user->id)->orderBy('id', 'desc')->get();
+        return view('checkout.user_order', compact('orders'));
+    }
+
+    public function order_list_detail(Request $request, $order_id)
+    {
+        $user = $request->user();
+        $orders = OrderList::where('user_id', $user->id)->find($order_id);
+        // dd($orders);
+
+        return view('checkout.order_detail', compact('orders'));
+    }
+
+
+
+    public function ec_pay(Request $request, $order_id)
+    {
+        $user = $request->user();
+        $orders = OrderList::where('user_id', $user->id)->find($order_id);
+
+        $string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+
+        $shuffle = str_shuffle($string);
+
+        if ($orders) {
+            $data = (object) [
+                'MerchantID' => '3002607',
+                'MerchantTradeNo' => $orders->order_id . substr($shuffle, 0, 3),
+                'MerchantTradeDate' => date('Y/m/d H:i:s'),
+                'PaymentType' => 'aio',
+                'TotalAmount' => $orders->total_price,
+                'TradeDesc' => '線上購物網站',
+                'ItemName' => 'shop',
+                'ReturnURL' => route('ecpay.returnBack'),
+                'ChoosePayment' => 'ALL',
+                'CheckMacValue' => '',
+                'EncryptType' => '1',
+                'ClientBackURL' => url('/'),
+                'IgnorePayment' => 'WebATM#CVS#BARCODE',
+
+            ];
+            // 測試用
+            $hashKey = 'pwFHCqoQZGmho4w6';
+            $hashIV = 'EkRm7iFT261dpevs';
+
+            $step1 = "ChoosePayment={$data->ChoosePayment}&ClientBackURL={$data->ClientBackURL}&EncryptType={$data->EncryptType}&IgnorePayment={$data->IgnorePayment}&ItemName={$data->ItemName}&MerchantID={$data->MerchantID}&MerchantTradeDate={$data->MerchantTradeDate}&MerchantTradeNo={$data->MerchantTradeNo}&PaymentType={$data->PaymentType}&ReturnURL={$data->ReturnURL}&TotalAmount={$data->TotalAmount}&TradeDesc={$data->TradeDesc}";
+
+            $step2 = "HashKey={$hashKey}&{$step1}&HashIV={$hashIV}";
+
+            $step3 = urlencode($step2);
+            $step4 = strtolower($step3);
+            $step5 = hash('sha256', $step4);
+            $step6 = strtoupper($step5);
+            
+            $data->CheckMacValue = $step6;
+
+            return view('ecpay', compact('data'));
+        } else {
+            return redirect(url('/'));
+        }
+    }
+
+    public function ec_pay_return(Request $request, $order_id)
+    {
+        // 綠界打不回來，因為我們是本地測試伺服器
+        dd($request->all());
     }
 
 

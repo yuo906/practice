@@ -100,39 +100,6 @@ class CheckOutController extends Controller
             $total += $value->product->price * $value->qty;
         }
 
-        // foreach ($request->all() as $key => $value) {
-
-        //     $cart_id = explode("productQty", $key);
-
-        //     if ($cart_id[0] != '_token') {
-        //         dump($cart_id);
-        //     }
-        //     dd('123');
-        //     $products = Cart::find($cart_id[1]);
-        //     // dd($products);
-        //     $products->update([
-        //         'qty' => $request->productQty,
-        //     ]);
-        // };
-
-
-
-        // 寫法一
-        // $oddCart = Cart::where('user_id', $request->user()->id)->where('product_id', $request->product_id)->first();
-        // if ($oddCart) {
-        //     $cart = $oddCart->update([
-        //         'qty' => $oddCart->qty + $request->qty,
-        //     ]);
-        // } else {
-        //     $cart = Cart::create([
-        //         'product_id' => $request->product_id,
-        //         'qty' => $request->qty,
-        //         'user_id' => $request->user()->id,
-        //     ]);
-        // }
-
-        // return view('checkout.del-info');
-
         return (object)[
             'code' => $updateCart ? 1 : 0,
             'price' => ($cart->product?->price ?? 0) * $cart->qty,
@@ -221,7 +188,7 @@ class CheckOutController extends Controller
                 'img_path' => $value->product->img_path,
                 'product_name' => $value->product->name,
                 'price' => $value->product->price,
-                'qty' =>$value->qty,
+                'qty' => $value->qty,
                 'desc' => $value->product->desc,
             ]);
 
@@ -235,13 +202,17 @@ class CheckOutController extends Controller
         session()->forget(['form_name', 'form_add', 'form_date', 'form_tel', 'form_ps', 'form_pay']);
 
 
-        $orderData = [
-            'name' => $request->user()->name,
-            'order_id' => $order->order_id,
-            'total_price' => $total,
-        ];
-        Mail::to($request->user()->email)->send(new OrderCreated($orderData));
-        return redirect(route('user.thx'));
+        // $orderData = [
+        //     'name' => $request->user()->name,
+        //     'order_id' => $order->order_id,
+        //     'total_price' => $total,
+        // ];
+        // Mail::to($request->user()->email)->send(new OrderCreated($orderData));
+        if ($request->pay === 1) {
+            return redirect(route('user.thx'));
+        } else {
+            return redirect(route('ecpay', ['order_id' => $order->id]));
+        }
     }
 
     public function thx(Request $request)

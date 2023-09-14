@@ -181,7 +181,7 @@
                             <span class="text-muted"><del>$24</del></span>
                         </div>
                         <button type="button" class="btn btn-success"><i class="fa-light fa-plus"
-                                style="color: #ffffff;"></i>&nbspAdd</button>
+                                style="color: #ffffff;"></i>&nbsp;Add</button>
                     </div>
                 </div>
             </div>
@@ -206,13 +206,13 @@
                     <div class="card-footer bg-transparent d-flex justify-content-between align-items-center">
                         <span>$24</span>
                         <button type="button" class="btn btn-success"><i class="fa-light fa-plus"
-                                style="color: #ffffff;"></i>&nbspAdd</button>
+                                style="color: #ffffff;"></i>&nbsp;Add</button>
                     </div>
                 </div>
             </div>
             <div class="col-6 col-md-4 col-lg">
                 <div class="card mb-3">
-                    <div class="card-header bg-transparent"><span>&nbsp</span></div>
+                    <div class="card-header bg-transparent"><span>&nbsp;</span></div>
                     <div class="card-body text-dark">
                         <img src="./img/product-img-3.jpg" alt="" class="img-fluid">
                         <span class="small text-muted">Bakery & Biscuits</span>
@@ -232,7 +232,7 @@
                             <span class="text-muted"><del>$35</del></span>
                         </div>
                         <button type="button" class="btn btn-success"><i class="fa-light fa-plus"
-                                style="color: #ffffff;"></i>&nbspAdd</button>
+                                style="color: #ffffff;"></i>&nbsp;Add</button>
                     </div>
                 </div>
             </div>
@@ -314,7 +314,7 @@
                             <span class="text-muted"><del>$24</del></span>
                         </div>
                         <button type="button" class="btn btn-success"><i class="fa-light fa-plus"
-                                style="color: #ffffff;"></i>&nbspAdd</button>
+                                style="color: #ffffff;"></i>&nbsp;Add</button>
                     </div>
                 </div>
             </div>

@@ -88,7 +88,6 @@ Route::middleware('auth')->group(function () {
         Route::post('/update/{id}', [CheckOutController::class, 'update'])->name('checkout.update');
 
         Route::delete('/delete/{id}', [CheckOutController::class, 'destroy'])->name('checkout.delete');
-
     });
 
     Route::prefix('/products')->group(function () {
@@ -105,14 +104,15 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/user_del_info', [CheckOutController::class, 'del_info'])->name('user.del');
         Route::post('/user_del_info_store', [CheckOutController::class, 'del_info_store'])->name('user.del_store');
+
         Route::get('/user_pay_info', [CheckOutController::class, 'pay_info'])->name('user.pay');
         Route::post('/user_pay_info_store', [CheckOutController::class, 'pay_info_store'])->name('user.pay_store');
         Route::get('/user_thx', [CheckOutController::class, 'thx'])->name('user.thx');
     });
 });
 
-
-
+Route::get('/ECpay/{order_id}', [FrontController::class, 'ec_pay'])->name('ecpay');
+Route::get('/ECpay/return_back', [FrontController::class, 'ec_pay_return'])->name('ecpay.returnBack');
 
 Route::middleware('auth', 'role.weight: 12')->group(function () {
     Route::prefix('/message')->group(function () {
@@ -126,6 +126,9 @@ Route::middleware('auth', 'role.weight: 12')->group(function () {
         Route::delete('/delete/{id}', [MessageController::class, 'destroy'])->name('message.delete');
         Route::delete('/deleteResponse/{id}', [MessageController::class, 'destroyResponse'])->name('message.deleteResponse');
     });
+
+    Route::get('/user_orderlist', [FrontController::class, 'order_list'])->name('user_orderlist');
+    Route::get('/user_orderlist/detail/{order_id}', [FrontController::class, 'order_list_detail'])->name('user_orderlist_detail');
 });
 
 

@@ -176,32 +176,23 @@
                             </div>
                         @endguest
 
-                        <a href="{{ route('product.cart') }}">
-                            <i class="fa-light fa-heart me-3 position-relative d-none d-lg-block"
-                                style="color: #87939a;">
-                                <span
-                                    class="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-success">
-                                    5
-                                </span>
-                            </i>
+                        <a href="{{ route('user_orderlist') }}">
+                            <i class="fa-light fa-rectangle-list me-3 d-none d-lg-block" style="color: #87939a;"></i>
                         </a>
-                        <button class="user me-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            <a href="{{ route('userinfo') }}">
-                                <i class="fa-light fa-user" style="color: #859198;"></i>
-                            </a>
-                        </button>
+                        <a href="{{ route('userinfo') }}">
+                            <i class="fa-light fa-user me-3" style="color: #859198;"></i>
+                        </a>
 
                         {{-- <button type="button" class="border-0 bg-white" data-bs-toggle="offcanvas"
                             data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"> --}}
-                            <a href="{{ route('user.check') }}">
-                                <i class="fa-sharp fa-light fa-bag-shopping position-relative"
-                                    style="color: #859198;">
-                                    {{-- <span
+                        <a href="{{ route('user.check') }}">
+                            <i class="fa-sharp fa-light fa-bag-shopping position-relative" style="color: #859198;">
+                                {{-- <span
                                     class="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-success">
                                     1
                                 </span> --}}
-                                </i>
-                            </a>
+                            </i>
+                        </a>
                         {{-- </button> --}}
 
                         {{-- Shop Cart --}}
