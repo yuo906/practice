@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Cart;
+use App\Models\OrderList;
+use App\Models\OrderProduct;
+use App\Mail\OrderCreated;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 
 class CheckOutController extends Controller
@@ -51,7 +55,28 @@ class CheckOutController extends Controller
         return view('checkout.checklist', compact('carts', 'total'));
     }
 
+    public function checkDelCart(Request $request)
+    {
 
+        $request->validate([
+            'cart_id' => 'required|exists:carts,id',
+        ]);
+
+        $cart = Cart::find($request->cart_id)->delete();
+
+        $carts = Cart::where('user_id', $request->user()->id)->get();
+
+        $total = 0;
+        foreach ($carts as $value) {
+            $total += $value->product->price * $value->qty;
+        }
+
+        return (object)[
+            'code' => $cart ? 1 : 0,
+            'id' => $request->cart_id,
+            'total' => $total,
+        ];
+    }
 
 
     public function changeQty(Request $request)
@@ -152,14 +177,70 @@ class CheckOutController extends Controller
 
     public function pay_info(Request $request)
     {
-        // $pay = $request->session()->get('form_pay', '');
+        $pay = $request->pay;
         // dd($pay);
-        return view('checkout.pay-info');
+        return view('checkout.pay-info', compact('pay'));
     }
 
     public function pay_info_store(Request $request)
     {
-        //
+        // dd($request->all());
+        $request->validate([
+            'pay' => 'required|numeric'
+        ]);
+
+        // 找購物車屬於使用者的資料
+        $carts = Cart::where('user_id', $request->user()->id)->get();
+
+        $todayOrderCount = OrderList::whereDate('created_at', today())->get()->count();
+
+        $string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+
+        $shuffle = str_shuffle($string);
+        // 建立主表
+        $order = OrderList::create([
+            'order_id' => 'HW' . date("Ymd") . str_pad($todayOrderCount, 4, '0', STR_PAD_LEFT) . substr($shuffle, 0, 3),
+            'user_id' => $request->user()->id,
+            'name' => session()->get('form_name'),
+            'address' => session()->get('form_add'),
+            'date' => session()->get('form_date'),
+            'tel_number' => session()->get('form_tel'),
+            'ps' => session()->get('form_ps') ?? '',
+            'pay' => $request->pay,
+        ]);
+
+        // 預設總價為0
+        $total = 0;
+
+        // 購物車有幾筆就執行幾次
+        foreach ($carts as $value) {
+
+            $total += $value->product->price * $value->qty;
+            OrderProduct::create([
+                'order_id' => $order->id,
+                'img_path' => $value->product->img_path,
+                'product_name' => $value->product->name,
+                'price' => $value->product->price,
+                'qty' =>$value->qty,
+                'desc' => $value->product->desc,
+            ]);
+
+            $value->delete();
+        }
+
+        $order->update([
+            'total_price' => $total,
+        ]);
+
+        session()->forget(['form_name', 'form_add', 'form_date', 'form_tel', 'form_ps', 'form_pay']);
+
+
+        $orderData = [
+            'name' => $request->user()->name,
+            'order_id' => $order->order_id,
+            'total_price' => $total,
+        ];
+        Mail::to($request->user()->email)->send(new OrderCreated($orderData));
         return redirect(route('user.thx'));
     }
 

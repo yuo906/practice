@@ -100,6 +100,7 @@ Route::middleware('auth')->group(function () {
     // 作業
     Route::prefix('/CheckOut')->group(function () {
         Route::get('/user_check', [CheckOutController::class, 'check'])->name('user.check');
+        Route::delete('/user_check_delCart', [CheckOutController::class, 'checkDelCart'])->name('user.check_delCart');
         Route::put('/user_checkqty', [CheckOutController::class, 'changeQty'])->name('user.checkqty');
 
         Route::get('/user_del_info', [CheckOutController::class, 'del_info'])->name('user.del');

@@ -17,18 +17,18 @@
             <div class="border border-secondary-subtle p-3">
                 <div class="input-group mb-2">
                     <input name="name" type="text" value="{{ $name }}" class="form-control" placeholder="收件者姓名" aria-label="Recipient's username"
-                        aria-describedby="basic-addon2">
+                        aria-describedby="basic-addon2" required>
                 </div>
                 <div class="input-group mb-2">
                     <input name="add" type="text" value="{{ $add }}" class="form-control" placeholder="收件者地址" aria-label="Recipient's username"
-                        aria-describedby="basic-addon2">
+                        aria-describedby="basic-addon2" required>
                 </div>
                 <div class="input-group date mb-2" id="datepicker">
-                    <input name="date" type="date" value="{{ $date }}" class="form-control" id="date" placeholder="">
+                    <input name="date" type="date" value="{{ $date }}" min="{{ substr(today(), 0, 10) }}" class="form-control" id="date" placeholder="" required>
                 </div>
                 <div class="input-group mb-2">
-                    <input name="tel" type="number" value="{{ $tel }}" maxlength="10" class="form-control" placeholder="收貨者連絡電話" aria-label="Recipient's username"
-                        aria-describedby="basic-addon2">
+                    <input name="tel" type="tel" value="{{ $tel }}" class="form-control" placeholder="收貨者連絡電話" aria-label="Recipient's username"
+                        aria-describedby="basic-addon2" required>
                 </div>
                 <div class="input-group">
                     <input name="ps" type="text" value="{{ $ps }}" class="form-control" placeholder="備註" aria-label="Recipient's username"

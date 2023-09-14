@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('order_products', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->bigInteger('order_list_id')->nullable()->comment('訂單編號');
+            $table->bigInteger('order_id')->nullable()->comment('訂單編號');
             $table->string('img_path')->nullable()->default('')->comment('圖片路徑');
-            $table->string('name')->nullable()->default('')->comment('產品名稱');
-            $table->integer('price')->nullable()->default(0)->comment('價格');
+            $table->string('product_name')->nullable()->default('')->comment('產品名稱');
+            $table->integer('price')->nullable()->default(0)->comment('產品價格');
         });
     }
 

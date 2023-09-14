@@ -62,7 +62,7 @@
         <ul class="list-group">
             <li class="list-group-item">Order Details</li>
             @foreach ($carts ?? [] as $item)
-                <li class="list-group-item d-flex justify-content-between align-items-center">
+                <li id="row{{ $item->id }}" class="list-group-item d-flex justify-content-between align-items-center">
                     <span><img src="{{ asset($item->product->img_path) }}" alt="" width="150"></span>
                     <div>{{ $item->product->name }}
                         <p>{{ $item->product->desc }}</p>
@@ -75,6 +75,7 @@
                         <button type="button" class="controlBtn plusBtn" onclick="plus({{ $item->id }})">+</button>
                     </div>
                     <span id="price{{ $item->id }}">${{ $item->product->price * $item->qty }}</span>
+                    <button type="button" class="btn btn-danger" onclick="deleteCart({{ $item->id }})">Delete</button>
                 </li>
             @endforeach
             <li class="list-group-item d-flex justify-content-between">
@@ -84,7 +85,7 @@
 
         </ul>
         @if ($carts->count())
-            <div class="d-flex justify-content-end">
+            <div id="nextStep" class="d-flex justify-content-end">
                 <a href="{{ route('user.del') }}">
                     <button type="button" class="btn btn-outline-dark border-5" style="width: 100px">下一步</button>
                 </a>
@@ -153,7 +154,49 @@
                     location.reload();
                 }
             });
+        }
 
+        function deleteCart(id) {
+
+            Swal.fire({
+                title: '確定要刪除此筆資料嗎?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: '刪除'
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+
+                    const formData = new FormData();
+                    formData.append('_token', '{{ csrf_token() }}');
+                    formData.append('_method', 'DELETE');
+                    formData.append('cart_id', id);
+
+                    fetch('{{ route('user.check_delCart') }}', {
+                        method: 'POST',
+                        body: formData,
+                    }).then((res) => {
+                        return res.json();
+                    }).then((data) => {
+                        if (data.code === 1) {
+                            const row = document.querySelector(`#row${data.id}`);
+                            const total = document.querySelector('#total');
+                            row.remove();
+                            total.textContent = '$' + data.total;
+
+                            const rows = document.querySelectorAll('[id^=row]');
+                            const nextBtn = document.querySelector('#nextStep');
+                            if(rows.length === 0) {
+                                nextBtn.textContent = '';
+                            }
+                        } else {
+                            location.reload();
+                        }
+                    });
+                }
+            });
         }
     </script>
 @endsection
