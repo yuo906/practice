@@ -129,6 +129,7 @@ Route::middleware('auth', 'role.weight: 12')->group(function () {
 
     Route::get('/user_orderlist', [FrontController::class, 'order_list'])->name('user_orderlist');
     Route::get('/user_orderlist/detail/{order_id}', [FrontController::class, 'order_list_detail'])->name('user_orderlist_detail');
+    Route::post('/user_order/backtoPay', [FrontController::class, 'back_to_pay'])->name('user_order.back_to_pay');
 });
 
 

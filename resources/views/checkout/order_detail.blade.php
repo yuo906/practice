@@ -39,3 +39,11 @@
         @endif
     </main>
 @endsection
+
+@if (Session::has('msg'))
+    @section('js')
+        <script>
+            Swal.fire('{{ Session::get("msg") }}');
+        </script>
+    @endsection
+@endif

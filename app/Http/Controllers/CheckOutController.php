@@ -208,69 +208,18 @@ class CheckOutController extends Controller
         //     'total_price' => $total,
         // ];
         // Mail::to($request->user()->email)->send(new OrderCreated($orderData));
-        if ($request->pay === 1) {
+        if ($request->pay == 1) {
             return redirect(route('user.thx'));
         } else {
             return redirect(route('ecpay', ['order_id' => $order->id]));
         }
     }
 
-    public function thx(Request $request)
+    public function thx()
     {
         //
         return view('checkout.thanks');
     }
 
 
-
-
-
-
-
-
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }

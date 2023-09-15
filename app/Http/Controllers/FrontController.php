@@ -136,6 +136,25 @@ class FrontController extends Controller
         return view('checkout.order_detail', compact('orders'));
     }
 
+    public function back_to_pay(Request $request)
+    {
+        $request->validate([
+            'orderId' => 'required|exists:order_lists,id'
+        ]);
+
+        $user = $request->user();
+        $orders = OrderList::where('user_id', $user->id)->find($request->orderId);
+
+        if ($orders) {
+            if ($orders->status == 1) {
+
+                return redirect(route('ecpay', ['order_id' => $request->orderId]));
+            };
+        } else {
+            return redirect(route('user_orderlist'))->with(['msg' => '訂單不存在']);
+        }
+    }
+
 
 
     public function ec_pay(Request $request, $order_id)
@@ -176,7 +195,7 @@ class FrontController extends Controller
             $step4 = strtolower($step3);
             $step5 = hash('sha256', $step4);
             $step6 = strtoupper($step5);
-            
+
             $data->CheckMacValue = $step6;
 
             return view('ecpay', compact('data'));

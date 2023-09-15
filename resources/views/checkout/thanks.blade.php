@@ -13,7 +13,8 @@
             <div class="d-flex justify-content-evenly px-5 mx-5">
                 <a href={{ route('user_orderlist') }}><button class="btn btn-outline-dark border-5"
                         style="width: 100px">回首頁</button></a>
-                <button class="btn btn-outline-dark border-5" style="width: 100px">查看訂單</button>
+                <a href="{{route('user_orderlist')}}">
+                    <button class="btn btn-outline-dark border-5" style="width: 100px">查看訂單</button></a>
             </div>
         </div>
     </div>
