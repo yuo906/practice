@@ -146,13 +146,14 @@ class FrontController extends Controller
         $orders = OrderList::where('user_id', $user->id)->find($request->orderId);
 
         if ($orders) {
+            // dd($orders->status);
             if ($orders->status == 1) {
-
                 return redirect(route('ecpay', ['order_id' => $request->orderId]));
             };
-        } else {
-            return redirect(route('user_orderlist'))->with(['msg' => '訂單不存在']);
         }
+
+        return redirect(route('user_orderlist'))->with(['msg' => '訂單不存在']);
+
     }
 
 
